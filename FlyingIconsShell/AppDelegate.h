@@ -7,9 +7,12 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "FlyingIconsDriver.h"
 
-@interface AppDelegate : NSObject <NSApplicationDelegate>
+@interface AppDelegate : NSObject <NSApplicationDelegate, NSWindowDelegate>
 
+@property (retain) FlyingIconsDriver *driver;
 @property (assign) IBOutlet NSWindow *window;
+@property (assign) IBOutlet NSOpenGLView *glView;
 
 @end

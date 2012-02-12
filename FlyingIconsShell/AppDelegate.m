@@ -11,6 +11,9 @@
 @implementation AppDelegate
 
 @synthesize window = _window;
+@synthesize glView = _glView;
+@synthesize driver = _driver;
+
 
 - (void)dealloc
 {
@@ -19,7 +22,20 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    // Insert code here to initialize your application
+    self.window.delegate = self;
+    self.driver = [[[FlyingIconsDriver alloc] init] autorelease];
+    self.driver.glView = self.glView;
+    self.driver.glContext = self.glView.openGLContext;
+    [self.driver start];
+    
+    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:1.0/30.0 target:self.driver selector:@selector(draw) userInfo:nil repeats:YES];
+    
+    [timer fire];
+}
+
+-(void)windowDidResize:(NSNotification *)notification
+{
+    [self.driver draw];
 }
 
 @end
