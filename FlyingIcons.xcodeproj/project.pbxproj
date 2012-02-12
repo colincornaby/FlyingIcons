@@ -13,6 +13,16 @@
 		316CB79C148ABC9A0061F45E /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 316CB79A148ABC9A0061F45E /* Credits.rtf */; };
 		316CB79F148ABC9A0061F45E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 316CB79E148ABC9A0061F45E /* AppDelegate.m */; };
 		316CB7A2148ABC9A0061F45E /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 316CB7A0148ABC9A0061F45E /* MainMenu.xib */; };
+		316CB7A9148ABF330061F45E /* FlyingIcons.c in Sources */ = {isa = PBXBuildFile; fileRef = 316CB7A8148ABF330061F45E /* FlyingIcons.c */; };
+		316CB7AC148ABF750061F45E /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 316CB7AB148ABF750061F45E /* OpenGL.framework */; };
+		31BF595F148B712E004F89D0 /* FlyingIconsDriver.m in Sources */ = {isa = PBXBuildFile; fileRef = 31BF595E148B712E004F89D0 /* FlyingIconsDriver.m */; };
+		31BF5967148B72C7004F89D0 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 316CB78B148ABC9A0061F45E /* Cocoa.framework */; };
+		31BF5969148B72C7004F89D0 /* ScreenSaver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31BF5968148B72C7004F89D0 /* ScreenSaver.framework */; };
+		31BF596F148B72C7004F89D0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 31BF596D148B72C7004F89D0 /* InfoPlist.strings */; };
+		31BF5973148B72C7004F89D0 /* Flying_Icons_ScreensaverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 31BF5972148B72C7004F89D0 /* Flying_Icons_ScreensaverView.m */; };
+		31BF5978148B7350004F89D0 /* FlyingIconsDriver.m in Sources */ = {isa = PBXBuildFile; fileRef = 31BF595E148B712E004F89D0 /* FlyingIconsDriver.m */; };
+		31BF5979148B7352004F89D0 /* FlyingIcons.c in Sources */ = {isa = PBXBuildFile; fileRef = 316CB7A8148ABF330061F45E /* FlyingIcons.c */; };
+		31BF597A148B7358004F89D0 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 316CB7AB148ABF750061F45E /* OpenGL.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,14 +31,26 @@
 		316CB78E148ABC9A0061F45E /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		316CB78F148ABC9A0061F45E /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		316CB790148ABC9A0061F45E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		316CB793148ABC9A0061F45E /* FlyingIconsShell-Info.plist */ = {isa = PBXFileReference; path = "FlyingIconsShell-Info.plist"; sourceTree = "<group>"; };
+		316CB793148ABC9A0061F45E /* FlyingIconsShell-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FlyingIconsShell-Info.plist"; sourceTree = "<group>"; };
 		316CB795148ABC9A0061F45E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		316CB797148ABC9A0061F45E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		316CB799148ABC9A0061F45E /* FlyingIconsShell-Prefix.pch */ = {isa = PBXFileReference; path = "FlyingIconsShell-Prefix.pch"; sourceTree = "<group>"; };
+		316CB799148ABC9A0061F45E /* FlyingIconsShell-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FlyingIconsShell-Prefix.pch"; sourceTree = "<group>"; };
 		316CB79B148ABC9A0061F45E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
-		316CB79D148ABC9A0061F45E /* AppDelegate.h */ = {isa = PBXFileReference; path = AppDelegate.h; sourceTree = "<group>"; };
+		316CB79D148ABC9A0061F45E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		316CB79E148ABC9A0061F45E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		316CB7A1148ABC9A0061F45E /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		316CB7A8148ABF330061F45E /* FlyingIcons.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = FlyingIcons.c; sourceTree = "<group>"; };
+		316CB7AA148ABF440061F45E /* FlyingIcons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlyingIcons.h; sourceTree = "<group>"; };
+		316CB7AB148ABF750061F45E /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		31BF595D148B712D004F89D0 /* FlyingIconsDriver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlyingIconsDriver.h; sourceTree = "<group>"; };
+		31BF595E148B712E004F89D0 /* FlyingIconsDriver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlyingIconsDriver.m; sourceTree = "<group>"; };
+		31BF5966148B72C7004F89D0 /* Flying Icons Screensaver.saver */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Flying Icons Screensaver.saver"; sourceTree = BUILT_PRODUCTS_DIR; };
+		31BF5968148B72C7004F89D0 /* ScreenSaver.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ScreenSaver.framework; path = System/Library/Frameworks/ScreenSaver.framework; sourceTree = SDKROOT; };
+		31BF596C148B72C7004F89D0 /* Flying Icons Screensaver-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Flying Icons Screensaver-Info.plist"; sourceTree = "<group>"; };
+		31BF596E148B72C7004F89D0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		31BF5970148B72C7004F89D0 /* Flying Icons Screensaver-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Flying Icons Screensaver-Prefix.pch"; sourceTree = "<group>"; };
+		31BF5971148B72C7004F89D0 /* Flying_Icons_ScreensaverView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Flying_Icons_ScreensaverView.h; sourceTree = "<group>"; };
+		31BF5972148B72C7004F89D0 /* Flying_Icons_ScreensaverView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Flying_Icons_ScreensaverView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,7 +58,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				316CB7AC148ABF750061F45E /* OpenGL.framework in Frameworks */,
 				316CB78C148ABC9A0061F45E /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		31BF5961148B72C7004F89D0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				31BF5967148B72C7004F89D0 /* Cocoa.framework in Frameworks */,
+				31BF5969148B72C7004F89D0 /* ScreenSaver.framework in Frameworks */,
+				31BF597A148B7358004F89D0 /* OpenGL.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -47,6 +80,7 @@
 			isa = PBXGroup;
 			children = (
 				316CB791148ABC9A0061F45E /* FlyingIconsShell */,
+				31BF596A148B72C7004F89D0 /* Flying Icons Screensaver */,
 				316CB78A148ABC9A0061F45E /* Frameworks */,
 				316CB788148ABC9A0061F45E /* Products */,
 			);
@@ -56,6 +90,7 @@
 			isa = PBXGroup;
 			children = (
 				316CB787148ABC9A0061F45E /* FlyingIconsShell.app */,
+				31BF5966148B72C7004F89D0 /* Flying Icons Screensaver.saver */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -63,7 +98,9 @@
 		316CB78A148ABC9A0061F45E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				316CB7AB148ABF750061F45E /* OpenGL.framework */,
 				316CB78B148ABC9A0061F45E /* Cocoa.framework */,
+				31BF5968148B72C7004F89D0 /* ScreenSaver.framework */,
 				316CB78D148ABC9A0061F45E /* Other Frameworks */,
 			);
 			name = Frameworks;
@@ -84,8 +121,12 @@
 			children = (
 				316CB79D148ABC9A0061F45E /* AppDelegate.h */,
 				316CB79E148ABC9A0061F45E /* AppDelegate.m */,
+				31BF595D148B712D004F89D0 /* FlyingIconsDriver.h */,
+				31BF595E148B712E004F89D0 /* FlyingIconsDriver.m */,
 				316CB7A0148ABC9A0061F45E /* MainMenu.xib */,
 				316CB792148ABC9A0061F45E /* Supporting Files */,
+				316CB7A8148ABF330061F45E /* FlyingIcons.c */,
+				316CB7AA148ABF440061F45E /* FlyingIcons.h */,
 			);
 			path = FlyingIconsShell;
 			sourceTree = "<group>";
@@ -102,7 +143,37 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		31BF596A148B72C7004F89D0 /* Flying Icons Screensaver */ = {
+			isa = PBXGroup;
+			children = (
+				31BF5971148B72C7004F89D0 /* Flying_Icons_ScreensaverView.h */,
+				31BF5972148B72C7004F89D0 /* Flying_Icons_ScreensaverView.m */,
+				31BF596B148B72C7004F89D0 /* Supporting Files */,
+			);
+			path = "Flying Icons Screensaver";
+			sourceTree = "<group>";
+		};
+		31BF596B148B72C7004F89D0 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				31BF596C148B72C7004F89D0 /* Flying Icons Screensaver-Info.plist */,
+				31BF596D148B72C7004F89D0 /* InfoPlist.strings */,
+				31BF5970148B72C7004F89D0 /* Flying Icons Screensaver-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		31BF5962148B72C7004F89D0 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
 		316CB786148ABC9A0061F45E /* FlyingIconsShell */ = {
@@ -122,13 +193,32 @@
 			productReference = 316CB787148ABC9A0061F45E /* FlyingIconsShell.app */;
 			productType = "com.apple.product-type.application";
 		};
+		31BF5965148B72C7004F89D0 /* Flying Icons Screensaver */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 31BF5974148B72C7004F89D0 /* Build configuration list for PBXNativeTarget "Flying Icons Screensaver" */;
+			buildPhases = (
+				31BF5960148B72C7004F89D0 /* Sources */,
+				31BF5961148B72C7004F89D0 /* Frameworks */,
+				31BF5962148B72C7004F89D0 /* Headers */,
+				31BF5963148B72C7004F89D0 /* Resources */,
+				31BF5964148B72C7004F89D0 /* Rez */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Flying Icons Screensaver";
+			productName = "Flying Icons Screensaver";
+			productReference = 31BF5966148B72C7004F89D0 /* Flying Icons Screensaver.saver */;
+			productType = "com.apple.product-type.bundle";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		316CB77E148ABC990061F45E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0420;
+				LastUpgradeCheck = 0430;
 				ORGANIZATIONNAME = "Consonance Software";
 			};
 			buildConfigurationList = 316CB781148ABC990061F45E /* Build configuration list for PBXProject "FlyingIconsShell" */;
@@ -144,6 +234,7 @@
 			projectRoot = "";
 			targets = (
 				316CB786148ABC9A0061F45E /* FlyingIconsShell */,
+				31BF5965148B72C7004F89D0 /* Flying Icons Screensaver */,
 			);
 		};
 /* End PBXProject section */
@@ -159,7 +250,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		31BF5963148B72C7004F89D0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				31BF596F148B72C7004F89D0 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXRezBuildPhase section */
+		31BF5964148B72C7004F89D0 /* Rez */ = {
+			isa = PBXRezBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXRezBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		316CB783148ABC9A0061F45E /* Sources */ = {
@@ -168,6 +277,18 @@
 			files = (
 				316CB798148ABC9A0061F45E /* main.m in Sources */,
 				316CB79F148ABC9A0061F45E /* AppDelegate.m in Sources */,
+				316CB7A9148ABF330061F45E /* FlyingIcons.c in Sources */,
+				31BF595F148B712E004F89D0 /* FlyingIconsDriver.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		31BF5960148B72C7004F89D0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				31BF5973148B72C7004F89D0 /* Flying_Icons_ScreensaverView.m in Sources */,
+				31BF5978148B7350004F89D0 /* FlyingIconsDriver.m in Sources */,
+				31BF5979148B7352004F89D0 /* FlyingIcons.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -198,6 +319,14 @@
 			name = MainMenu.xib;
 			sourceTree = "<group>";
 		};
+		31BF596D148B72C7004F89D0 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				31BF596E148B72C7004F89D0 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -205,7 +334,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -221,9 +350,9 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = macosx;
+				SDKROOT = macosx10.6;
 			};
 			name = Debug;
 		};
@@ -231,7 +360,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -241,8 +370,8 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
-				SDKROOT = macosx;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				SDKROOT = macosx10.6;
 			};
 			name = Release;
 		};
@@ -252,6 +381,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FlyingIconsShell/FlyingIconsShell-Prefix.pch";
 				INFOPLIST_FILE = "FlyingIconsShell/FlyingIconsShell-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -263,8 +393,35 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FlyingIconsShell/FlyingIconsShell-Prefix.pch";
 				INFOPLIST_FILE = "FlyingIconsShell/FlyingIconsShell-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		31BF5975148B72C7004F89D0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_ENABLE_OBJC_GC = supported;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Flying Icons Screensaver/Flying Icons Screensaver-Prefix.pch";
+				INFOPLIST_FILE = "Flying Icons Screensaver/Flying Icons Screensaver-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Screen Savers";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = saver;
+			};
+			name = Debug;
+		};
+		31BF5976148B72C7004F89D0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_ENABLE_OBJC_GC = supported;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Flying Icons Screensaver/Flying Icons Screensaver-Prefix.pch";
+				INFOPLIST_FILE = "Flying Icons Screensaver/Flying Icons Screensaver-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Screen Savers";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = saver;
 			};
 			name = Release;
 		};
@@ -285,6 +442,15 @@
 			buildConfigurations = (
 				316CB7A6148ABC9A0061F45E /* Debug */,
 				316CB7A7148ABC9A0061F45E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		31BF5974148B72C7004F89D0 /* Build configuration list for PBXNativeTarget "Flying Icons Screensaver" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				31BF5975148B72C7004F89D0 /* Debug */,
+				31BF5976148B72C7004F89D0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};
