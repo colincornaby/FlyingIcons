@@ -7,7 +7,11 @@
 //
 
 #import <ScreenSaver/ScreenSaver.h>
+#import "FlyingIconsDriver.h"
 
 @interface Flying_Icons_ScreensaverView : ScreenSaverView
-
+{
+    FlyingIconsDriver * _driver;
+}
+@property (retain) FlyingIconsDriver * driver;
 @end
