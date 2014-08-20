@@ -43,7 +43,7 @@
 
 #define timeUntilFadeIn 0.0f
 #define fadeInTime 1500.0f
-#define lifeTime 9000.0f
+#define lifeTime 17000.0f
 #define fadeOutTime 1500.0f
 #define numIcons 22.0f
 

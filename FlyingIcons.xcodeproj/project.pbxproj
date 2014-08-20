@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		316CB798148ABC9A0061F45E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 316CB797148ABC9A0061F45E /* main.m */; };
 		316CB79F148ABC9A0061F45E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 316CB79E148ABC9A0061F45E /* AppDelegate.m */; };
 		316CB7A2148ABC9A0061F45E /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 316CB7A0148ABC9A0061F45E /* MainMenu.xib */; };
 		316CB7A9148ABF330061F45E /* FlyingIcons.c in Sources */ = {isa = PBXBuildFile; fileRef = 316CB7A8148ABF330061F45E /* FlyingIcons.c */; };
@@ -20,7 +19,6 @@
 /* Begin PBXFileReference section */
 		316CB787148ABC9A0061F45E /* FlyingIconsShell.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlyingIconsShell.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		316CB793148ABC9A0061F45E /* FlyingIconsShell-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FlyingIconsShell-Info.plist"; sourceTree = "<group>"; };
-		316CB797148ABC9A0061F45E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		316CB799148ABC9A0061F45E /* FlyingIconsShell-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FlyingIconsShell-Prefix.pch"; sourceTree = "<group>"; };
 		316CB79D148ABC9A0061F45E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		316CB79E148ABC9A0061F45E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -37,13 +35,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		316CB784148ABC9A0061F45E /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		31BF5961148B72C7004F89D0 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -83,7 +74,6 @@
 			isa = PBXGroup;
 			children = (
 				316CB793148ABC9A0061F45E /* FlyingIconsShell-Info.plist */,
-				316CB797148ABC9A0061F45E /* main.m */,
 				316CB799148ABC9A0061F45E /* FlyingIconsShell-Prefix.pch */,
 			);
 			name = "Supporting Files";
@@ -126,7 +116,6 @@
 			buildConfigurationList = 316CB7A5148ABC9A0061F45E /* Build configuration list for PBXNativeTarget "FlyingIconsShell" */;
 			buildPhases = (
 				316CB783148ABC9A0061F45E /* Sources */,
-				316CB784148ABC9A0061F45E /* Frameworks */,
 				316CB785148ABC9A0061F45E /* Resources */,
 			);
 			buildRules = (
@@ -163,7 +152,7 @@
 		316CB77E148ABC990061F45E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0430;
+				LastUpgradeCheck = 0600;
 				ORGANIZATIONNAME = "Consonance Software";
 			};
 			buildConfigurationList = 316CB781148ABC990061F45E /* Build configuration list for PBXProject "FlyingIcons" */;
@@ -217,7 +206,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				316CB798148ABC9A0061F45E /* main.m in Sources */,
 				316CB79F148ABC9A0061F45E /* AppDelegate.m in Sources */,
 				316CB7A9148ABF330061F45E /* FlyingIcons.c in Sources */,
 				31BF595F148B712E004F89D0 /* FlyingIconsDriver.m in Sources */,
@@ -252,25 +240,19 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
-				COPY_PHASE_STRIP = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_DYNAMIC_NO_PIC = NO;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				GCC_C_LANGUAGE_STANDARD = c11;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = macosx;
 			};
 			name = Debug;
 		};
@@ -278,32 +260,25 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
-				COPY_PHASE_STRIP = YES;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_C_LANGUAGE_STANDARD = gnu99;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				GCC_C_LANGUAGE_STANDARD = c11;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
-				SDKROOT = macosx;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 			};
 			name = Release;
 		};
 		316CB7A6148ABC9A0061F45E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FlyingIconsShell/FlyingIconsShell-Prefix.pch";
 				INFOPLIST_FILE = "FlyingIconsShell/FlyingIconsShell-Info.plist";
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -311,14 +286,12 @@
 		316CB7A7148ABC9A0061F45E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FlyingIconsShell/FlyingIconsShell-Prefix.pch";
 				INFOPLIST_FILE = "FlyingIconsShell/FlyingIconsShell-Info.plist";
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = macosx;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -326,7 +299,7 @@
 		31BF5975148B72C7004F89D0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				GCC_ENABLE_OBJC_GC = supported;
+				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Flying Icons Screensaver/Flying Icons Screensaver-Prefix.pch";
 				INFOPLIST_FILE = "Flying Icons Screensaver/Flying Icons Screensaver-Info.plist";
@@ -339,7 +312,7 @@
 		31BF5976148B72C7004F89D0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				GCC_ENABLE_OBJC_GC = supported;
+				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Flying Icons Screensaver/Flying Icons Screensaver-Prefix.pch";
 				INFOPLIST_FILE = "Flying Icons Screensaver/Flying Icons Screensaver-Info.plist";
