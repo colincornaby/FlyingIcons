@@ -222,7 +222,7 @@
 		316CB77E148ABC990061F45E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0600;
+				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = "Consonance Software";
 			};
 			buildConfigurationList = 316CB781148ABC990061F45E /* Build configuration list for PBXProject "FlyingIcons" */;

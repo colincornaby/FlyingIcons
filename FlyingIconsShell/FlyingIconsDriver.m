@@ -83,7 +83,6 @@ int iconCallback(void * callbackContext, struct flyingIconImage ** images );
         if(iconFileName)
             iconFilePath = [appBundle pathForImageResource:iconFileName];
     }
-    NSLog(@"%@", iconFilePath);
     NSImage * iconImage = [[NSImage alloc] initWithContentsOfFile:iconFilePath];
     NSAssert(iconImage, @"");
     

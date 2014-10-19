@@ -84,8 +84,8 @@ void addNewIcon(flyingIconsContextPtr context)
         float iconSpeed = (1.0f - (r * r)) * 0.035 + 0.0035;
         r = (float)rand()/(float)RAND_MAX;
         newIcon->twirl = floor(r*40) == 1 ? 1 : 0;
-        newIcon->deltaX = iconSpeed * cos(iconAngle) * context->xBias;
-        newIcon->deltaY = iconSpeed * sin(iconAngle);
+        newIcon->deltaX = iconSpeed * cos(iconAngle) * context->xBias * 1.2;
+        newIcon->deltaY = iconSpeed * sin(iconAngle) * 1.2;
         if(context->firstIcon)
             newIcon->nextIcon = context->firstIcon;
         context->firstIcon = newIcon;
