@@ -15,6 +15,7 @@
 		316CB7A2148ABC9A0061F45E /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 316CB7A0148ABC9A0061F45E /* MainMenu.xib */; };
 		316CB7A9148ABF330061F45E /* FlyingIcons.c in Sources */ = {isa = PBXBuildFile; fileRef = 316CB7A8148ABF330061F45E /* FlyingIcons.c */; };
 		316CB7AC148ABF750061F45E /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 316CB7AB148ABF750061F45E /* OpenGL.framework */; };
+		31889BCE19C3FC4600FC7ED2 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31889BCD19C3FC4600FC7ED2 /* Quartz.framework */; };
 		31BF595F148B712E004F89D0 /* FlyingIconsDriver.m in Sources */ = {isa = PBXBuildFile; fileRef = 31BF595E148B712E004F89D0 /* FlyingIconsDriver.m */; };
 		31BF5967148B72C7004F89D0 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 316CB78B148ABC9A0061F45E /* Cocoa.framework */; };
 		31BF5969148B72C7004F89D0 /* ScreenSaver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31BF5968148B72C7004F89D0 /* ScreenSaver.framework */; };
@@ -42,6 +43,7 @@
 		316CB7A8148ABF330061F45E /* FlyingIcons.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = FlyingIcons.c; sourceTree = "<group>"; };
 		316CB7AA148ABF440061F45E /* FlyingIcons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlyingIcons.h; sourceTree = "<group>"; };
 		316CB7AB148ABF750061F45E /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		31889BCD19C3FC4600FC7ED2 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
 		31BF595D148B712D004F89D0 /* FlyingIconsDriver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlyingIconsDriver.h; sourceTree = "<group>"; };
 		31BF595E148B712E004F89D0 /* FlyingIconsDriver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlyingIconsDriver.m; sourceTree = "<group>"; };
 		31BF5966148B72C7004F89D0 /* Flying Icons Screensaver.saver */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Flying Icons Screensaver.saver"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -58,6 +60,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				31889BCE19C3FC4600FC7ED2 /* Quartz.framework in Frameworks */,
 				316CB7AC148ABF750061F45E /* OpenGL.framework in Frameworks */,
 				316CB78C148ABC9A0061F45E /* Cocoa.framework in Frameworks */,
 			);
@@ -98,6 +101,7 @@
 		316CB78A148ABC9A0061F45E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				31889BCD19C3FC4600FC7ED2 /* Quartz.framework */,
 				316CB7AB148ABF750061F45E /* OpenGL.framework */,
 				316CB78B148ABC9A0061F45E /* Cocoa.framework */,
 				31BF5968148B72C7004F89D0 /* ScreenSaver.framework */,
@@ -218,10 +222,10 @@
 		316CB77E148ABC990061F45E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0430;
+				LastUpgradeCheck = 0600;
 				ORGANIZATIONNAME = "Consonance Software";
 			};
-			buildConfigurationList = 316CB781148ABC990061F45E /* Build configuration list for PBXProject "FlyingIconsShell" */;
+			buildConfigurationList = 316CB781148ABC990061F45E /* Build configuration list for PBXProject "FlyingIcons" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -352,7 +356,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = macosx10.6;
+				SDKROOT = macosx;
 			};
 			name = Debug;
 		};
@@ -371,7 +375,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
-				SDKROOT = macosx10.6;
+				SDKROOT = macosx;
 			};
 			name = Release;
 		};
@@ -428,7 +432,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		316CB781148ABC990061F45E /* Build configuration list for PBXProject "FlyingIconsShell" */ = {
+		316CB781148ABC990061F45E /* Build configuration list for PBXProject "FlyingIcons" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				316CB7A3148ABC9A0061F45E /* Debug */,
@@ -453,6 +457,7 @@
 				31BF5976148B72C7004F89D0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

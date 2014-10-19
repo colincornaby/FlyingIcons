@@ -44,5 +44,6 @@
 @property (retain) FlyingIconsDriver *driver;
 @property (assign) IBOutlet NSWindow *window;
 @property (assign) IBOutlet NSOpenGLView *glView;
+@property (assign) CVDisplayLinkRef displayLink;
 
 @end

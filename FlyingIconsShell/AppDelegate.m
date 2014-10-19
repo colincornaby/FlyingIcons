@@ -56,11 +56,20 @@
     self.driver = [[[FlyingIconsDriver alloc] init] autorelease];
     self.driver.glView = self.glView;
     self.driver.glContext = self.glView.openGLContext;
+    
+    CGLEnable( self.driver.glContext.CGLContextObj, kCGLCEMPEngine);
+    
     [self.driver start];
-    
-    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:1.0/30.0 target:self.driver selector:@selector(draw) userInfo:nil repeats:YES];
-    
-    [timer fire];
+    CVDisplayLinkCreateWithActiveCGDisplays(&_displayLink);
+    CVDisplayLinkSetOutputCallback(self.displayLink, &DisplayLinkCallback, self.driver);
+    CVDisplayLinkSetCurrentCGDisplayFromOpenGLContext(self.displayLink, self.glView.openGLContext.CGLContextObj, self.glView.pixelFormat.CGLPixelFormatObj);
+    CVDisplayLinkStart(self.displayLink);
+}
+
+static CVReturn DisplayLinkCallback(CVDisplayLinkRef displayLink, const CVTimeStamp* now, const CVTimeStamp* outputTime, CVOptionFlags flagsIn, CVOptionFlags* flagsOut, void* displayLinkContext)
+{
+    [(FlyingIconsDriver *)displayLinkContext draw];
+    return kCVReturnSuccess;
 }
 
 -(void)windowDidResize:(NSNotification *)notification

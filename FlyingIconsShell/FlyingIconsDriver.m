@@ -70,10 +70,22 @@ int iconCallback(void * callbackContext, struct flyingIconImage ** images );
         [self performSelectorInBackground:@selector(getNextIcon) withObject:nil];
         return;
     }
-    int r = ((float)rand()/(float)RAND_MAX) * (self.query.resultCount-1);
     
-    NSMetadataItem *item = [self.query resultAtIndex:r];
-    NSImage * iconImage = [[NSWorkspace sharedWorkspace] iconForFile:[item valueForAttribute:@"kMDItemPath"]];
+    NSString *iconFilePath  = nil;
+    
+    while(!iconFilePath)
+    {
+        int r = ((float)rand()/(float)RAND_MAX) * (self.query.resultCount-1);
+        NSMetadataItem *item = [self.query resultAtIndex:r];
+        NSBundle *appBundle = [NSBundle bundleWithPath:[item valueForAttribute:@"kMDItemPath"]];
+        NSDictionary *appInfo = [appBundle infoDictionary];
+        NSString *iconFileName = [appInfo objectForKey:@"CFBundleIconFile"];
+        if(iconFileName)
+            iconFilePath = [appBundle pathForImageResource:iconFileName];
+    }
+    NSLog(@"%@", iconFilePath);
+    NSImage * iconImage = [[NSImage alloc] initWithContentsOfFile:iconFilePath];
+    NSAssert(iconImage, @"");
     
     void * imageBuffer = malloc(4 * 128 * 128);
     NSBitmapImageRep *bitmap = [[NSBitmapImageRep alloc] initWithBitmapDataPlanes:(unsigned char **)&imageBuffer pixelsWide:128 pixelsHigh:128 bitsPerSample:8 samplesPerPixel:4 hasAlpha:YES isPlanar:NO colorSpaceName:NSCalibratedRGBColorSpace bytesPerRow:128*4 bitsPerPixel:32];
@@ -105,7 +117,7 @@ int iconCallback(void * callbackContext, struct flyingIconImage ** images );
 {
     [self.glContext makeCurrentContext];
     NSRect frame = [self.glView frame];
-    drawFlyingIcons(self.iconsContext, frame.size.width, frame.size.height);
+    drawFlyingIcons(self.iconsContext, frame.size.width * self.glView.window.backingScaleFactor, frame.size.height* self.glView.window.backingScaleFactor);
     [self.glContext flushBuffer];
 }
 
@@ -114,6 +126,7 @@ int iconCallback(void * callbackContext, struct flyingIconImage ** images )
     FlyingIconsDriver * self = (FlyingIconsDriver *)callbackContext;
     if(!self.nextIcon)
         return 0;
+    
     struct flyingIconImage * imageArray = malloc(sizeof(struct flyingIconImage)*3);
     imageArray[0].width = 128;
     imageArray[0].height = 128;
@@ -129,7 +142,12 @@ int iconCallback(void * callbackContext, struct flyingIconImage ** images )
     
     *images = imageArray;
     
+    self.nextIcon = nil;
+    self.nextSmallIcon = nil;
+    self.nextSmallestIcon = nil;
+    
     [self performSelectorInBackground:@selector(getNextIcon) withObject:nil];
+    
     return 3;
 }
 

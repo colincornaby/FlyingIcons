@@ -56,6 +56,7 @@
         };
         [self setAnimationTimeInterval:1/30.0];
         NSOpenGLView *glView =[[NSOpenGLView alloc] initWithFrame:self.bounds pixelFormat:[[[NSOpenGLPixelFormat alloc] initWithAttributes:attrs] autorelease]];
+        [glView setWantsBestResolutionOpenGLSurface:YES];
         [self addSubview:glView];
         [glView setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
         glView.alphaValue =0.0;

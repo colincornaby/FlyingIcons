@@ -145,11 +145,11 @@ void drawFlyingIcons(flyingIconsContextPtr context, float hRes, float vRes)
     
     
     
-    glEnable(GL_POINT_SMOOTH);
+    //glEnable(GL_POINT_SMOOTH);
     
-    glEnable(GL_LINE_SMOOTH);
+    //glEnable(GL_LINE_SMOOTH);
     
-    glEnable(GL_POLYGON_SMOOTH);
+    //glEnable(GL_POLYGON_SMOOTH);
     
     struct flyingIcon * icon = context->firstIcon;
     struct flyingIcon *lastIcon = NULL;
