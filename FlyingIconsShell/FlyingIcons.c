@@ -43,57 +43,15 @@
 
 #define timeUntilFadeIn 0.0f
 #define fadeInTime 1500.0f
-#define lifeTime 16000.0f
+#define lifeTime 17000.0f
 #define fadeOutTime 1500.0f
 #define numIcons 22.0f
 
 void addNewIcon(flyingIconsContextPtr context);
 void destroyIcon(struct flyingIcon * icon);
 
-void addNewIcon(flyingIconsContextPtr context)
-{
-    struct flyingIconImage * images;
-    int iconCount = context->iconGetter(context->callbackContext, &images);
-    if(iconCount)
-    {
-        struct flyingIcon * newIcon = malloc(sizeof(struct flyingIcon));
-        glGenTextures(1, &(newIcon->textureID));
-        glBindTexture(GL_TEXTURE_2D, newIcon->textureID);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-        int i = 0;
-        for(i=0;i<iconCount;i++)
-        {
-            struct flyingIconImage iconEntry = images[i];
-            glTexImage2D(GL_TEXTURE_2D, i, GL_RGBA8, iconEntry.width, iconEntry.height, 0, GL_RGBA, GL_UNSIGNED_BYTE, (const void *) iconEntry.imageBuffer);
-            i++;
-            free(iconEntry.imageBuffer);
-        }
-        free(images);
-        context->currentIconNum++;
-        struct timeval spawnTime;
-        gettimeofday(&spawnTime, NULL);
-        gettimeofday(&spawnTime, NULL);
-        newIcon->spawnTime = spawnTime;
-        newIcon->nextIcon = NULL;
-        float r = (float)rand()/(float)RAND_MAX;
-        float iconAngle = r * 62.9f;
-        r = (float)rand()/(float)RAND_MAX;
-        float iconSpeed = (1.0f - (r * r)) * 0.035 + 0.0035;
-        r = (float)rand()/(float)RAND_MAX;
-        newIcon->twirl = floor(r*40) == 1 ? 1 : 0;
-        newIcon->deltaX = iconSpeed * cos(iconAngle) * context->xBias * 1.2;
-        newIcon->deltaY = iconSpeed * sin(iconAngle) * 1.2;
-        if(context->firstIcon)
-            newIcon->nextIcon = context->firstIcon;
-        context->firstIcon = newIcon;
-    }
-}
 
-void drawFlyingIcons(flyingIconsContextPtr context, float hRes, float vRes)
-{
+void drawFlyingIcons(flyingIconsContextPtr context, float hRes, float vRes) {
     
     glEnable(GL_TEXTURE_2D);
     
@@ -231,8 +189,7 @@ void drawFlyingIcons(flyingIconsContextPtr context, float hRes, float vRes)
     glFlush();
 }
 
-flyingIconsContextPtr newFlyingIconsContext(void)
-{
+flyingIconsContextPtr newFlyingIconsContext(void) {
     flyingIconsContextPtr context = (flyingIconsContextPtr)malloc(sizeof(struct flyingIconsContext));
     context->currentIconNum = 0;
     context->firstIcon = NULL;
@@ -241,14 +198,55 @@ flyingIconsContextPtr newFlyingIconsContext(void)
     return context;
 }
 
-void setFlyingIconsContextCallback(flyingIconsContextPtr context, int (*callBack)(void * context, struct flyingIconImage ** images), void * callbackContext)
-{
+void setFlyingIconsContextCallback(flyingIconsContextPtr   context,
+                                    int (*callBack)(void * context, struct flyingIconImage ** images),
+                                                    void * callbackContext) {
     context->callbackContext = callbackContext;
     context->iconGetter = callBack;
 }
 
-void destroyIcon(struct flyingIcon * icon)
-{
+void destroyIcon(struct flyingIcon * icon)      {
     glDeleteTextures(1, &(icon->textureID));
     free(icon);
+}
+
+void addNewIcon(flyingIconsContextPtr context)  {
+    struct flyingIconImage * images;
+    int iconCount = context->iconGetter(context->callbackContext, &images);
+    if(iconCount)
+    {
+        struct flyingIcon * newIcon = malloc(sizeof(struct flyingIcon));
+        glGenTextures(1, &(newIcon->textureID));
+        glBindTexture(GL_TEXTURE_2D, newIcon->textureID);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        int i = 0;
+        for(i=0;i<iconCount;i++)
+        {
+            struct flyingIconImage iconEntry = images[i];
+            glTexImage2D(GL_TEXTURE_2D, i, GL_RGBA8, iconEntry.width, iconEntry.height, 0, GL_RGBA, GL_UNSIGNED_BYTE, (const void *) iconEntry.imageBuffer);
+            i++;
+//            if (iconEntry.imageBuffer != NULL) free(iconEntry.imageBuffer);
+        }
+        free(images);
+        context->currentIconNum++;
+        struct timeval spawnTime;
+        gettimeofday(&spawnTime, NULL);
+        gettimeofday(&spawnTime, NULL);
+        newIcon->spawnTime = spawnTime;
+        newIcon->nextIcon = NULL;
+        float r = (float)rand()/(float)RAND_MAX;
+        float iconAngle = r * 62.9f;
+        r = (float)rand()/(float)RAND_MAX;
+        float iconSpeed = (1.0f - (r * r)) * 0.035 + 0.0035;
+        r = (float)rand()/(float)RAND_MAX;
+        newIcon->twirl = floor(r*40) == 1 ? 1 : 0;
+        newIcon->deltaX = iconSpeed * cos(iconAngle) * context->xBias;
+        newIcon->deltaY = iconSpeed * sin(iconAngle);
+        if(context->firstIcon)
+            newIcon->nextIcon = context->firstIcon;
+        context->firstIcon = newIcon;
+    }
 }
