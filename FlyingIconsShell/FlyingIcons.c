@@ -240,7 +240,7 @@ void addNewIcon(flyingIconsContextPtr context)  {
         float r = (float)rand()/(float)RAND_MAX;
         float iconAngle = r * 62.9f;
         r = (float)rand()/(float)RAND_MAX;
-        float iconSpeed = (1.0f - (r * r)) * 0.035 + 0.0035;
+        float iconSpeed = (1.0f - (r * r)) * 0.05 + 0.0035;
         r = (float)rand()/(float)RAND_MAX;
         newIcon->twirl = floor(r*40) == 1 ? 1 : 0;
         newIcon->deltaX = iconSpeed * cos(iconAngle) * context->xBias;
