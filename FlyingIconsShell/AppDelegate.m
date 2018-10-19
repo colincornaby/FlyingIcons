@@ -19,20 +19,24 @@
     
     [self.driver start];
     CVDisplayLinkCreateWithActiveCGDisplays(&_displayLink);
-    CVDisplayLinkSetOutputCallback(self.displayLink, &DisplayLinkCallback, self.driver);
+    CVDisplayLinkSetOutputCallback(self.displayLink, &DisplayLinkCallback, (__bridge void * _Nullable)(self.driver));
     CVDisplayLinkSetCurrentCGDisplayFromOpenGLContext(self.displayLink, self.glView.openGLContext.CGLContextObj, self.glView.pixelFormat.CGLPixelFormatObj);
     CVDisplayLinkStart(self.displayLink);
 }
 
 static CVReturn DisplayLinkCallback(CVDisplayLinkRef displayLink, const CVTimeStamp* now, const CVTimeStamp* outputTime, CVOptionFlags flagsIn, CVOptionFlags* flagsOut, void* displayLinkContext)
 {
-    [(FlyingIconsDriver *)displayLinkContext draw];
+    FlyingIconsDriver *driver = (__bridge FlyingIconsDriver *)displayLinkContext;
+    CGLLockContext(driver.glContext.CGLContextObj);
+    [(__bridge FlyingIconsDriver *)displayLinkContext draw];
+    CGLUnlockContext(driver.glContext.CGLContextObj);
     return kCVReturnSuccess;
 }
 
 -(void)windowDidResize:(NSNotification *)notification
 {
-    [self.driver draw];
+    //self.displayLink
+    //[self.driver draw];
 }
 
 @end

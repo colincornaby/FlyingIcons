@@ -50,6 +50,7 @@ int iconCallback(void * callbackContext, struct flyingIconImage ** images );
     _query.delegate = self;
     [_query startQuery];
     self.glContext = self.glView.openGLContext;
+    self.glContext.view = self.glView;
     
     self.iconsContext = newFlyingIconsContext();
     setFlyingIconsContextCallback(self.iconsContext, iconCallback, (__bridge void *) self);
@@ -104,10 +105,12 @@ int iconCallback(void * callbackContext, struct flyingIconImage ** images );
 
 -(void)draw
 {
-    [self.glContext makeCurrentContext];
-    NSRect frame = [self.glView frame];
-    drawFlyingIcons(self.iconsContext, frame.size.width * self.glView.window.backingScaleFactor, frame.size.height* self.glView.window.backingScaleFactor);
-    [self.glContext flushBuffer];
+    NSOpenGLContext *context = self.glContext;
+    [context makeCurrentContext];
+    GLint dims[4] = {0};
+    glGetIntegerv(GL_VIEWPORT, dims);
+    drawFlyingIcons(self.iconsContext, dims[2], dims[3]);
+    [context flushBuffer];
 }
 
 int iconCallback(void * callbackContext, struct flyingIconImage ** images )
