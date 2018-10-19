@@ -39,27 +39,20 @@
 #import "FlyingIconsDriver.h"
 
 @implementation FlyingIconsDriver
-@synthesize glContext = _glContext;
-@synthesize iconsContext = _iconsContext;
-@synthesize query = _query;
-@synthesize nextIcon = _nextIcon;
-@synthesize nextSmallIcon = _nextSmallIcon;
-@synthesize nextSmallestIcon = _nextSmallestIcon;
-@synthesize glView = _glView;
 
 int iconCallback(void * callbackContext, struct flyingIconImage ** images );
 
--(void)start
-{
+-(void) start {
+
     srand((unsigned)time(0));
-    self.query = [[[NSMetadataQuery alloc] init] autorelease];
-    self.query.predicate = [NSPredicate predicateWithFormat:@"kMDItemKind == 'Application'"];
-    self.query.delegate = self;
-    [self.query startQuery];
-    self.glContext = [self.glView openGLContext];
+    self.query = NSMetadataQuery.new;
+    _query.predicate = [NSPredicate predicateWithFormat:@"kMDItemKind == 'Application'"];
+    _query.delegate = self;
+    [_query startQuery];
+    self.glContext = self.glView.openGLContext;
     
     self.iconsContext = newFlyingIconsContext();
-    setFlyingIconsContextCallback(self.iconsContext, iconCallback, (void *) self);
+    setFlyingIconsContextCallback(self.iconsContext, iconCallback, (__bridge void *) self);
     [self performSelectorInBackground:@selector(getNextIcon) withObject:nil];
 }
 
@@ -80,7 +73,6 @@ int iconCallback(void * callbackContext, struct flyingIconImage ** images );
     NSGraphicsContext *gContext = [NSGraphicsContext graphicsContextWithBitmapImageRep:bitmap];
     [NSGraphicsContext setCurrentContext:gContext];
     [iconImage drawInRect:NSMakeRect(0.0, 0.0, 128.0, 128.0) fromRect:NSMakeRect(0.0, 0.0, [iconImage size].width, [iconImage size].height) operation:NSCompositeCopy fraction:1.0];
-    [bitmap release];
     self.nextIcon = imageBuffer;
     
     void *smallImageBuffer = malloc(4 * 64 * 64);
@@ -88,7 +80,6 @@ int iconCallback(void * callbackContext, struct flyingIconImage ** images );
     gContext = [NSGraphicsContext graphicsContextWithBitmapImageRep:bitmap];
     [NSGraphicsContext setCurrentContext:gContext];
     [iconImage drawInRect:NSMakeRect(0.0, 0.0, 64, 64) fromRect:NSMakeRect(0.0, 0.0, [iconImage size].width, [iconImage size].height) operation:NSCompositeCopy fraction:1.0];
-    [bitmap release];
     self.nextSmallIcon = smallImageBuffer;
     
     void *smallestImageBuffer = malloc(4 * 32 * 32);
@@ -96,7 +87,6 @@ int iconCallback(void * callbackContext, struct flyingIconImage ** images );
     gContext = [NSGraphicsContext graphicsContextWithBitmapImageRep:bitmap];
     [NSGraphicsContext setCurrentContext:gContext];
     [iconImage drawInRect:NSMakeRect(0.0, 0.0, 32, 32) fromRect:NSMakeRect(0.0, 0.0, [iconImage size].width, [iconImage size].height) operation:NSCompositeCopy fraction:1.0];
-    [bitmap release];
     
     self.nextSmallestIcon = smallestImageBuffer;
 }
@@ -111,7 +101,7 @@ int iconCallback(void * callbackContext, struct flyingIconImage ** images );
 
 int iconCallback(void * callbackContext, struct flyingIconImage ** images )
 {
-    FlyingIconsDriver * self = (FlyingIconsDriver *)callbackContext;
+    FlyingIconsDriver * self = (__bridge FlyingIconsDriver *)callbackContext;
     if(!self.nextIcon)
         return 0;
     struct flyingIconImage * imageArray = malloc(sizeof(struct flyingIconImage)*3);
