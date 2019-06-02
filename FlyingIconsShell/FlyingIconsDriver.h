@@ -8,20 +8,18 @@
  */
 
 #import <Foundation/Foundation.h>
-#import "FlyingIcons.h"
+#import "FlyingIconsGL.h"
 
 @interface FlyingIconsDriver : NSObject <NSMetadataQueryDelegate>
 
 
 @property          flyingIconsContextPtr   iconsContext;
-@property                NSOpenGLContext * glContext;
 @property                NSMetadataQuery * query;
-@property                           void * nextIcon,
+@property                           void * nextJumboIcon,
+                                         * nextIcon,
                                          * nextSmallIcon,
                                          * nextSmallestIcon;
-@property (assign) IBOutlet NSOpenGLView * glView;
 
 -(void) start;
--(void) draw;
 
 @end

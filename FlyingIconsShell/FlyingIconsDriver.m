@@ -49,9 +49,6 @@ int iconCallback(void * callbackContext, struct flyingIconImage ** images );
     _query.predicate = [NSPredicate predicateWithFormat:@"kMDItemKind == 'Application'"];
     _query.delegate = self;
     [_query startQuery];
-    self.glContext = self.glView.openGLContext;
-    self.glContext.view = self.glView;
-    
     self.iconsContext = newFlyingIconsContext();
     setFlyingIconsContextCallback(self.iconsContext, iconCallback, (__bridge void *) self);
     [self performSelectorInBackground:@selector(getNextIcon) withObject:nil];
@@ -80,9 +77,16 @@ int iconCallback(void * callbackContext, struct flyingIconImage ** images );
     NSImage * iconImage = [[NSImage alloc] initWithContentsOfFile:iconFilePath];
     NSAssert(iconImage, @"");
     
-    void * imageBuffer = malloc(4 * 128 * 128);
-    NSBitmapImageRep *bitmap = [[NSBitmapImageRep alloc] initWithBitmapDataPlanes:(unsigned char **)&imageBuffer pixelsWide:128 pixelsHigh:128 bitsPerSample:8 samplesPerPixel:4 hasAlpha:YES isPlanar:NO colorSpaceName:NSCalibratedRGBColorSpace bytesPerRow:128*4 bitsPerPixel:32];
+    void * jumboImageBuffer = malloc(4 * 512 * 512);
+    NSBitmapImageRep *bitmap = [[NSBitmapImageRep alloc] initWithBitmapDataPlanes:(unsigned char **)&jumboImageBuffer pixelsWide:512 pixelsHigh:512 bitsPerSample:8 samplesPerPixel:4 hasAlpha:YES isPlanar:NO colorSpaceName:NSCalibratedRGBColorSpace bytesPerRow:512*4 bitsPerPixel:32];
     NSGraphicsContext *gContext = [NSGraphicsContext graphicsContextWithBitmapImageRep:bitmap];
+    [NSGraphicsContext setCurrentContext:gContext];
+    [iconImage drawInRect:NSMakeRect(0.0, 0.0, 512.0, 512.0) fromRect:NSMakeRect(0.0, 0.0, [iconImage size].width, [iconImage size].height) operation:NSCompositeCopy fraction:1.0];
+    self.nextJumboIcon = jumboImageBuffer;
+    
+    void * imageBuffer = malloc(4 * 128 * 128);
+    bitmap = [[NSBitmapImageRep alloc] initWithBitmapDataPlanes:(unsigned char **)&imageBuffer pixelsWide:128 pixelsHigh:128 bitsPerSample:8 samplesPerPixel:4 hasAlpha:YES isPlanar:NO colorSpaceName:NSCalibratedRGBColorSpace bytesPerRow:128*4 bitsPerPixel:32];
+    gContext = [NSGraphicsContext graphicsContextWithBitmapImageRep:bitmap];
     [NSGraphicsContext setCurrentContext:gContext];
     [iconImage drawInRect:NSMakeRect(0.0, 0.0, 128.0, 128.0) fromRect:NSMakeRect(0.0, 0.0, [iconImage size].width, [iconImage size].height) operation:NSCompositeCopy fraction:1.0];
     self.nextIcon = imageBuffer;
@@ -103,16 +107,6 @@ int iconCallback(void * callbackContext, struct flyingIconImage ** images );
     self.nextSmallestIcon = smallestImageBuffer;
 }
 
--(void)draw
-{
-    NSOpenGLContext *context = self.glContext;
-    [context makeCurrentContext];
-    GLint dims[4] = {0};
-    glGetIntegerv(GL_VIEWPORT, dims);
-    drawFlyingIcons(self.iconsContext, dims[2], dims[3]);
-    [context flushBuffer];
-}
-
 int iconCallback(void * callbackContext, struct flyingIconImage ** images )
 {
     FlyingIconsDriver * self = (__bridge FlyingIconsDriver *)callbackContext;
@@ -120,6 +114,10 @@ int iconCallback(void * callbackContext, struct flyingIconImage ** images )
         return 0;
     
     struct flyingIconImage * imageArray = malloc(sizeof(struct flyingIconImage)*3);
+    //imageArray[0].width = 512;
+    //imageArray[0].height = 512;
+    //imageArray[0].imageBuffer=self.nextJumboIcon;
+    
     imageArray[0].width = 128;
     imageArray[0].height = 128;
     imageArray[0].imageBuffer=self.nextIcon;
@@ -140,7 +138,7 @@ int iconCallback(void * callbackContext, struct flyingIconImage ** images )
     
     [self performSelectorInBackground:@selector(getNextIcon) withObject:nil];
     
-    return 3;
+    return 4;
 }
 
 @end

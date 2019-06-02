@@ -27,7 +27,7 @@
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright © 2011 Consonance Software. All rights reserved.</string>
 	<key>NSMainNibFile</key>
-	<string>MainMenu-Metal</string>
+	<string>MainMenu-OpenGL</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
 	<key>NSSupportsAutomaticGraphicsSwitching</key>
