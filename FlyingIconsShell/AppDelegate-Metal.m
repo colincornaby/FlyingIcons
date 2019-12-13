@@ -121,6 +121,8 @@ void iconDestructor(struct flyingIcon *icon, void *context) {
             
             struct Uniforms uniforms;
             uniforms.transform = matrix_identity_float4x4;
+            uniforms.transform.columns[0][3] = xPos;
+            uniforms.transform.columns[1][3] = yPos;
             uniforms.transform.columns[0][0] = 1.0/aspectRatio;
             uniforms.transform.columns[1][1] = 1.0;
             uniforms.transform.columns[2][2] = 1.0;
@@ -130,18 +132,18 @@ void iconDestructor(struct flyingIcon *icon, void *context) {
                 inverseTranslateMatrix.columns[3][1] = -yPos;
                 inverseTranslateMatrix.columns[3][2] = 1;
                 matrix_float4x4 rotationMatrix = matrix_identity_float4x4;
-                rotationMatrix.columns[0][0] = cosf(rotation);
-                rotationMatrix.columns[0][1] = sinf(rotation);
-                rotationMatrix.columns[1][0] = -sinf(rotation);
                 rotationMatrix.columns[1][1] = cosf(rotation);
+                rotationMatrix.columns[1][2] = sinf(rotation);
+                rotationMatrix.columns[2][1] = -sinf(rotation);
+                rotationMatrix.columns[2][2] = cosf(rotation);
                 matrix_float4x4 translateMatrix = matrix_identity_float4x4;
                 translateMatrix.columns[3][0] = xPos;
                 translateMatrix.columns[3][1] = yPos;
-                //uniforms.transform = matrix_multiply(uniforms.transform, inverseTranslateMatrix);
+                uniforms.transform = matrix_multiply(uniforms.transform, rotationMatrix);
                 NSLog(@"Rotate");
-                /*uniforms.transform = matrix_multiply(uniforms.transform,
-                                                     matrix_multiply(translateMatrix,
-                                                                     matrix_multiply(rotationMatrix, inverseTranslateMatrix)));*/
+                //uniforms.transform = matrix_multiply(uniforms.transform,
+                                                     //matrix_multiply(translateMatrix,
+                                                                     //matrix_multiply(rotationMatrix, //inverseTranslateMatrix)));
             
                 
                 uniforms.alpha = alpha;
@@ -158,6 +160,9 @@ void iconDestructor(struct flyingIcon *icon, void *context) {
                 //}
                 //glScalef(scale, scale, 0.0f);
                 iconSpawnTime = -1.0;
+                                               //(xPos, yPos, 0.0f, 0.0f));
+                xPos = 0;
+                yPos = 0;
                 float vertices[] = {-0.1 * scale + xPos, 0.1 * scale + yPos, (float) -iconSpawnTime,
                     -0.1 * scale + xPos, -0.1 * scale + yPos, (float) -iconSpawnTime,
                     0.1 * scale + xPos, 0.1 * scale + yPos, (float) -iconSpawnTime,
