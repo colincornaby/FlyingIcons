@@ -3,11 +3,13 @@
 //  FlyingIconsShell Metal
 //
 //  Created by Colin Cornaby on 10/19/18.
-//  Copyright © 2018 Consonance Software. All rights reserved.
+//  Copyright © 2018 Colin Cornaby. All rights reserved.
 //
 
+//This file was intentionally kept at OpenGL 1.X for compatibility. With tools moving on I'm considering moving this to 2.X. But portability to older Macs was important when this was written.
+
 #include "FlyingIconsGL.h"
-#include "FlyingIcons.h"
+#include "FlyingIcons-Mac.h"
 #include <memory.h>
 #import <OpenGL/gl.h>
 
@@ -29,7 +31,7 @@ void drawFlyingIcons(flyingIconsContextPtr context, float hRes, float vRes) {
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     glViewport(0.0, 0.0, hRes, vRes);
-    glOrtho(-1.0, 1.0, -1.0/(hRes/vRes), 1.0/(hRes/vRes), 1.0, -1.0);
+    glOrtho(-1.0, 1.0, -1.0, 1.0, 1.0, -1.0);
     
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
@@ -40,8 +42,6 @@ void drawFlyingIcons(flyingIconsContextPtr context, float hRes, float vRes) {
     glEnableClientState(GL_VERTEX_ARRAY);
     glEnableClientState(GL_COLOR_ARRAY);
     glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-    
-    glEnable(GL_BLEND);
     
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     
@@ -56,12 +56,6 @@ void drawFlyingIcons(flyingIconsContextPtr context, float hRes, float vRes) {
     
     prepareContext(context, currTime);
     
-    //glEnable(GL_POINT_SMOOTH);
-    
-    //glEnable(GL_LINE_SMOOTH);
-    
-    //glEnable(GL_POLYGON_SMOOTH);
-    
     struct flyingIcon * icon = context->firstIcon;
     struct flyingIcon *lastIcon = NULL;
     
@@ -69,23 +63,29 @@ void drawFlyingIcons(flyingIconsContextPtr context, float hRes, float vRes) {
     {
         
         glPushMatrix();
-        //we use the iconLifeTime to determine the z positioning
-        long iconSpawnTime = ((icon->spawnTime.tv_sec) * 1000 + icon->spawnTime.tv_usec/1000.0) + 0.5;
         
-        float xPos, yPos, scale, rotation, alpha;
-        currentStateOfFlyingIcon(icon, &xPos, &yPos, &scale, &rotation, &alpha, context);
+        matrix_float4x4 transform;
+        float alpha;
+        currentMatrixStateOfFlyingIcon(icon, &transform, &alpha, context);
+        //matrix_float4x4 is by column, OpenGL expects by row
+        matrix_float4x4 transformByRow = matrix_transpose(transform);
         
         if(alpha != 0) {
-            glTranslatef(xPos, yPos, 0.0);
+            //manually setting the gl matrix
+            //the Metal version uses a vertex shader to apply the matrix
+            //we'll stick to old school GL here
+            glMatrixMode(GL_MODELVIEW);
+            glLoadIdentity();
+            glMultMatrixf((float *) &transformByRow);
             
-            if(rotation!=0)
-            {
-                glRotatef((GLfloat) rotation, 0.0, 0.0, 1.0);
-            }
-            glScalef(scale, scale, 0.0f);
-            
-            GLfloat vertices[] = {-0.1, 0.1, (GLfloat) -iconSpawnTime,  0.1,0.1, (GLfloat) -iconSpawnTime,  0.1, -0.1, (GLfloat) -iconSpawnTime,  -0.1, -0.1, (GLfloat) -iconSpawnTime};
-            GLfloat texVertices[] = {0.0, 0.0,  1.0,0.0,  1.0, 1.0,  0.0, 1.0};
+            GLfloat vertices[] = {-0.1, 0.1, 0.0,
+                0.1,0.1, 0.0,
+                0.1, -0.1, 0.0,
+                -0.1, -0.1, 0.0};
+            GLfloat texVertices[] = {0.0, 0.0,
+                1.0,0.0,
+                1.0, 1.0,
+                0.0, 1.0};
             
             GLfloat colors[] = {1.0, 1.0, 1.0, (GLfloat)alpha,
                 1.0, 1.0, 1.0, (GLfloat)alpha,
@@ -100,10 +100,11 @@ void drawFlyingIcons(flyingIconsContextPtr context, float hRes, float vRes) {
             
             glDrawArrays(GL_QUADS, 0, 4);
             
-            glPopMatrix();
+            
         }
         lastIcon = icon;
         icon = icon->nextIcon;
+        glPopMatrix();
     }
     
     glDisableClientState(GL_VERTEX_ARRAY);

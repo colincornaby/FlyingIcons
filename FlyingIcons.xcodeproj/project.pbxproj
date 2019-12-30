@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		311543AB217A9024003A7568 /* FlyingIconsGL.c in Sources */ = {isa = PBXBuildFile; fileRef = 311543A9217A8ECC003A7568 /* FlyingIconsGL.c */; };
 		311543AE217AA7BA003A7568 /* Shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 311543AD217AA7BA003A7568 /* Shaders.metal */; };
+		3117C27023B99D7000AC2962 /* FlyingIcons-Mac.h in Headers */ = {isa = PBXBuildFile; fileRef = 3117C26E23B99D7000AC2962 /* FlyingIcons-Mac.h */; };
+		3117C27123B99D7000AC2962 /* FlyingIcons-Mac.c in Sources */ = {isa = PBXBuildFile; fileRef = 3117C26F23B99D7000AC2962 /* FlyingIcons-Mac.c */; };
+		3117C27223B99D7000AC2962 /* FlyingIcons-Mac.c in Sources */ = {isa = PBXBuildFile; fileRef = 3117C26F23B99D7000AC2962 /* FlyingIcons-Mac.c */; };
+		3117C27323B99D7000AC2962 /* FlyingIcons-Mac.c in Sources */ = {isa = PBXBuildFile; fileRef = 3117C26F23B99D7000AC2962 /* FlyingIcons-Mac.c */; };
 		316CB7A9148ABF330061F45E /* FlyingIcons.c in Sources */ = {isa = PBXBuildFile; fileRef = 316CB7A8148ABF330061F45E /* FlyingIcons.c */; };
 		31BF595F148B712E004F89D0 /* FlyingIconsDriver.m in Sources */ = {isa = PBXBuildFile; fileRef = 31BF595E148B712E004F89D0 /* FlyingIconsDriver.m */; };
 		31BF5973148B72C7004F89D0 /* Flying_Icons_ScreensaverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 31BF5972148B72C7004F89D0 /* Flying_Icons_ScreensaverView.m */; };
@@ -26,6 +30,8 @@
 		311543A8217A8ECC003A7568 /* FlyingIconsGL.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FlyingIconsGL.h; sourceTree = "<group>"; };
 		311543A9217A8ECC003A7568 /* FlyingIconsGL.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = FlyingIconsGL.c; sourceTree = "<group>"; };
 		311543AD217AA7BA003A7568 /* Shaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Shaders.metal; sourceTree = "<group>"; };
+		3117C26E23B99D7000AC2962 /* FlyingIcons-Mac.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FlyingIcons-Mac.h"; sourceTree = "<group>"; };
+		3117C26F23B99D7000AC2962 /* FlyingIcons-Mac.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "FlyingIcons-Mac.c"; sourceTree = "<group>"; };
 		316CB787148ABC9A0061F45E /* FlyingIconsShell Metal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "FlyingIconsShell Metal.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		316CB793148ABC9A0061F45E /* FlyingIconsShell-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FlyingIconsShell-Info.plist"; sourceTree = "<group>"; };
 		316CB799148ABC9A0061F45E /* FlyingIconsShell-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FlyingIconsShell-Prefix.pch"; sourceTree = "<group>"; };
@@ -78,6 +84,8 @@
 				31EBB95A2179A03D002A10D2 /* OpenGL */,
 				316CB7AA148ABF440061F45E /* FlyingIcons.h */,
 				316CB7A8148ABF330061F45E /* FlyingIcons.c */,
+				3117C26E23B99D7000AC2962 /* FlyingIcons-Mac.h */,
+				3117C26F23B99D7000AC2962 /* FlyingIcons-Mac.c */,
 				31BF595D148B712D004F89D0 /* FlyingIconsDriver.h */,
 				31BF595E148B712E004F89D0 /* FlyingIconsDriver.m */,
 				316CB792148ABC9A0061F45E /* Supporting Files */,
@@ -143,6 +151,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3117C27023B99D7000AC2962 /* FlyingIcons-Mac.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -214,6 +223,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = 316CB77C148ABC990061F45E;
@@ -270,6 +280,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				311543AE217AA7BA003A7568 /* Shaders.metal in Sources */,
+				3117C27123B99D7000AC2962 /* FlyingIcons-Mac.c in Sources */,
 				316CB7A9148ABF330061F45E /* FlyingIcons.c in Sources */,
 				31EBB95E2179A072002A10D2 /* AppDelegate-Metal.m in Sources */,
 				31BF595F148B712E004F89D0 /* FlyingIconsDriver.m in Sources */,
@@ -281,6 +292,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				31BF5973148B72C7004F89D0 /* Flying_Icons_ScreensaverView.m in Sources */,
+				3117C27223B99D7000AC2962 /* FlyingIcons-Mac.c in Sources */,
 				31BF5978148B7350004F89D0 /* FlyingIconsDriver.m in Sources */,
 				31BF5979148B7352004F89D0 /* FlyingIcons.c in Sources */,
 			);
@@ -291,6 +303,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				311543AB217A9024003A7568 /* FlyingIconsGL.c in Sources */,
+				3117C27323B99D7000AC2962 /* FlyingIcons-Mac.c in Sources */,
 				31EBB94C21799E5B002A10D2 /* AppDelegate-OpenGL.m in Sources */,
 				31EBB94D21799E5B002A10D2 /* FlyingIcons.c in Sources */,
 				31EBB94E21799E5B002A10D2 /* FlyingIconsDriver.m in Sources */,

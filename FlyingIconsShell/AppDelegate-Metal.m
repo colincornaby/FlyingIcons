@@ -4,6 +4,7 @@
 //
 
 #import "AppDelegate-Metal.h"
+#import "FlyingIcons-Mac.h"
 #import <Metal/Metal.h>
 
 @interface AppDelegate ()
@@ -29,6 +30,7 @@ struct Uniforms
     self.device = MTLCreateSystemDefaultDevice();
     self.metalView.device = self.device;
     self.metalView.delegate = self;
+    self.metalView.sampleCount = 2;
     self.commandQueue = self.device.newCommandQueue;
     
     
@@ -92,6 +94,7 @@ void iconDestructor(struct flyingIcon *icon, void *context) {
         mtlVertexDescriptor.layouts[1].stepFunction = MTLVertexStepFunctionPerVertex;
         
         pipelineDescriptor.vertexDescriptor = mtlVertexDescriptor;
+        pipelineDescriptor.sampleCount = self.metalView.sampleCount;
         
         NSError *error;
         self.pipelineState = [self.device newRenderPipelineStateWithDescriptor:pipelineDescriptor error:&error];
@@ -104,7 +107,6 @@ void iconDestructor(struct flyingIcon *icon, void *context) {
         
         
         struct flyingIcon * icon = self.driver.iconsContext->firstIcon;
-        struct flyingIcon *lastIcon = NULL;
         
         
         id<MTLRenderCommandEncoder> renderCommandEncoder = [commandBuffer renderCommandEncoderWithDescriptor:renderPassDescriptor];
@@ -115,46 +117,21 @@ void iconDestructor(struct flyingIcon *icon, void *context) {
         
         while(icon!=NULL)
         {
-            float xPos, yPos, scale, rotation, alpha;
-            currentStateOfFlyingIcon(icon, &xPos, &yPos, &scale, &rotation, &alpha, self.driver.iconsContext);
-            rotation = (rotation/180.0f) * M_PI;
-            long iconSpawnTime = ((icon->spawnTime.tv_sec) * 1000 + icon->spawnTime.tv_usec/1000.0) + 0.5;
+            matrix_float4x4 transform;
+            float alpha;
+            currentMatrixStateOfFlyingIcon(icon, &transform, &alpha, self.driver.iconsContext);
             
             struct Uniforms uniforms;
-            uniforms.transform = matrix_identity_float4x4;
-            if(rotation != 0){
-                matrix_float4x4 inverseTranslateMatrix = matrix_identity_float4x4;
-                inverseTranslateMatrix.columns[3][2] = 1;
-                matrix_float4x4 rotationMatrix = matrix_identity_float4x4;
-                rotationMatrix.columns[0][0] = cosf(rotation);
-                rotationMatrix.columns[0][1] = sinf(rotation);
-                rotationMatrix.columns[1][0] = -sinf(rotation);
-                rotationMatrix.columns[1][1] = cosf(rotation);
-                uniforms.transform = matrix_multiply(uniforms.transform, rotationMatrix);
-                //uniforms.transform = matrix_multiply(uniforms.transform,
-                                                     //matrix_multiply(translateMatrix,
-                                                                     //matrix_multiply(rotationMatrix, //inverseTranslateMatrix)));
-            }
-            matrix_float4x4 translationAndScaleMatrix = matrix_identity_float4x4;
-            translationAndScaleMatrix.columns[0][3] = xPos;
-            translationAndScaleMatrix.columns[1][3] = yPos;
-            translationAndScaleMatrix.columns[0][0] = 1.0/aspectRatio;
-            translationAndScaleMatrix.columns[1][1] = 1.0;
-            translationAndScaleMatrix.columns[2][2] = 1.0;
-            uniforms.transform = matrix_multiply(uniforms.transform, translationAndScaleMatrix);
+            uniforms.transform = transform;
             uniforms.alpha = alpha;
             if(alpha != 0) {
-                iconSpawnTime = -1.0;
-                                               //(xPos, yPos, 0.0f, 0.0f));
-                xPos = 0;
-                yPos = 0;
-                float vertices[] = {-0.1 * scale + xPos, 0.1 * scale + yPos, (float) -iconSpawnTime,
-                    -0.1 * scale + xPos, -0.1 * scale + yPos, (float) -iconSpawnTime,
-                    0.1 * scale + xPos, 0.1 * scale + yPos, (float) -iconSpawnTime,
+                float vertices[] = {-0.1, 0.1, (float) 0.0,
+                    -0.1, -0.1, (float) 0.0,
+                    0.1, 0.1, (float) 0.0,
                     
-                    0.1 * scale + xPos, 0.1 * scale + yPos, (float) -iconSpawnTime,
-                    -0.1 * scale + xPos, -0.1 * scale + yPos, (float) -iconSpawnTime,
-                    0.1 * scale + xPos, -0.1 * scale + yPos, (float) -iconSpawnTime};
+                    0.1 , 0.1, (float) 0.0,
+                    -0.1, -0.1, (float) 0.0,
+                    0.1, -0.1, (float) 0.0};
                 float texVertices[] = {
                     0.0, 0.0,
                     0.0, 1.0,
@@ -173,7 +150,6 @@ void iconDestructor(struct flyingIcon *icon, void *context) {
                 [renderCommandEncoder drawPrimitives:MTLPrimitiveTypeTriangleStrip vertexStart:0 vertexCount:6];
                 
             }
-            lastIcon = icon;
             icon = icon->nextIcon;
         }
         [renderCommandEncoder endEncoding];

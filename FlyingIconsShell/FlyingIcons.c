@@ -67,8 +67,10 @@ void prepareContext(flyingIconsContextPtr context, struct timeval currTime)
         {
             if(lastIcon)
                 lastIcon->nextIcon=icon->nextIcon;
+                
+            struct flyingIcon * nextIcon = icon->nextIcon;
             destroyIcon(icon, context);
-            icon=icon->nextIcon;
+            icon = nextIcon;
         } else {
             lastIcon = icon;
             icon = icon->nextIcon;
@@ -123,7 +125,6 @@ void addNewIcon(flyingIconsContextPtr context)  {
         newIcon->nextIcon = NULL;
         struct timeval spawnTime;
         gettimeofday(&spawnTime, NULL);
-        gettimeofday(&spawnTime, NULL);
         newIcon->spawnTime = spawnTime;
         if(context->firstIcon)
             newIcon->nextIcon = context->firstIcon;
@@ -142,7 +143,7 @@ struct flyingIcon * createFlyingIcon(float xBias) {
     r = (float)rand()/(float)RAND_MAX;
     float iconSpeed = (1.0f - (r * r)) * 0.05 + 0.0035;
     r = (float)rand()/(float)RAND_MAX;
-    icon->twirl = floor(r*25) == 1 ? 1 : 0;
+    icon->twirl = (r * 25.0f) < 1.0f;
     icon->deltaX = iconSpeed * cos(iconAngle) * xBias;
     icon->deltaY = iconSpeed * sin(iconAngle);
     return icon;
