@@ -15,7 +15,7 @@
 
 @property          flyingIconsContextPtr   iconsContext;
 @property                NSMetadataQuery * query;
-@property                           void * nextJumboIcon,
+@property                           void //* nextJumboIcon,
                                          * nextIcon,
                                          * nextSmallIcon,
                                          * nextSmallestIcon;

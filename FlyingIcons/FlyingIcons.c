@@ -70,6 +70,11 @@ void prepareContext(flyingIconsContextPtr context, struct timeval currTime)
                 
             struct flyingIcon * nextIcon = icon->nextIcon;
             destroyIcon(icon, context);
+            //it's possible if we stalled long enough that the first icon in the stack (which is normally the newest) has expired
+            //there should never be a next icon, but let's follow linked list behavior
+            if(icon == context->firstIcon) {
+                context->firstIcon = nextIcon;
+            }
             icon = nextIcon;
         } else {
             lastIcon = icon;
@@ -120,6 +125,14 @@ void addNewIcon(flyingIconsContextPtr context)  {
     {
         struct flyingIcon * newIcon = createFlyingIcon(context->xBias);
         context->constructorCallback(newIcon, images, iconCount, context->constructorDestructorCallback);
+        //Have to go back and free each image buffer individually
+        //Memory management for these images is getting weird
+        int bufferToFree = 0;
+        for(bufferToFree=0; bufferToFree < iconCount; bufferToFree++) {
+            if(images[bufferToFree].imageBuffer) {
+                free(images[bufferToFree].imageBuffer);
+            }
+        }
         free(images);
         context->currentIconNum++;
         newIcon->nextIcon = NULL;

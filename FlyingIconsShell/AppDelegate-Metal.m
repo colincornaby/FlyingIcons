@@ -110,6 +110,11 @@ void iconDestructor(struct flyingIcon *icon, void *context) {
         
         
         id<MTLRenderCommandEncoder> renderCommandEncoder = [commandBuffer renderCommandEncoderWithDescriptor:renderPassDescriptor];
+        
+        struct timeval currTime;
+        gettimeofday(&currTime, NULL);
+        prepareContext(self.driver.iconsContext, currTime);
+        
         [renderCommandEncoder setRenderPipelineState:self.pipelineState];
         
         float aspectRatio = ((float)renderPassDescriptor.colorAttachments[0].texture.width)/((float)renderPassDescriptor.colorAttachments[0].texture.height);
@@ -153,11 +158,6 @@ void iconDestructor(struct flyingIcon *icon, void *context) {
             icon = icon->nextIcon;
         }
         [renderCommandEncoder endEncoding];
-        
-        
-        struct timeval currTime;
-        gettimeofday(&currTime, NULL);
-        prepareContext(self.driver.iconsContext, currTime);
         [commandBuffer presentDrawable:self.metalView.currentDrawable];
         [commandBuffer commit];
     }

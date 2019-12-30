@@ -38,7 +38,9 @@
 
 #import "Flying_Icons_ScreensaverView.h"
 #import <OpenGL/OpenGL.h>
+#import <Metal/Metal.h>
 #import <Cocoa/Cocoa.h>
+#import "FlyingIconsGLView.h"
 
 @implementation Flying_Icons_ScreensaverView
 
@@ -48,24 +50,18 @@
 {
     self = [super initWithFrame:frame isPreview:isPreview];
     if (self) {
-        NSOpenGLPixelFormatAttribute attrs[] =
-        {
-            NSOpenGLPFADoubleBuffer,
-            NSOpenGLPFADepthSize, 32,
-            0
-        };
         [self setAnimationTimeInterval:1/30.0];
-        NSOpenGLView *glView =[[NSOpenGLView alloc] initWithFrame:self.bounds pixelFormat:[[[NSOpenGLPixelFormat alloc] initWithAttributes:attrs] autorelease]];
-        [glView setWantsBestResolutionOpenGLSurface:YES];
-        [self addSubview:glView];
-        [glView setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
-        glView.alphaValue =0.0;
-        self.driver = [[[FlyingIconsDriver alloc] init] autorelease];
-        self.driver.glView = glView;
-        self.driver.glContext = glView.openGLContext;
+        id<MTLDevice> metalDevice = MTLCreateSystemDefaultDevice();
+        //if(metalDevice) {
+            
+       // } else {
+            self.renderView = [[FlyingIconsGLView alloc] initWithFrame:self.bounds];
+            [self addSubview:self.renderView];
+            [self.renderView setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
+       // }
+        self.driver = [[FlyingIconsDriver alloc] init] ;
+        self.renderView.driver = self.driver;
         [self.driver start];
-        [self.driver draw];
-        [glView release];
     }
     return self;
 }
@@ -87,8 +83,9 @@
 
 - (void)animateOneFrame
 {
-    [self.driver draw];
-    self.driver.glView.alphaValue=1.0;
+    [self.renderView drawFlyingIconsContents];
+    //[self.driver draw];
+    //self.driver.glView.alphaValue=1.0;
     return;
 }
 
@@ -104,7 +101,6 @@
 
 -(void)dealloc
 {
-    [super dealloc];
 }
 
 @end

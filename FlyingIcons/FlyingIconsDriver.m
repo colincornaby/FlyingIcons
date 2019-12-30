@@ -77,16 +77,16 @@ int iconCallback(void * callbackContext, struct flyingIconImage ** images );
     NSImage * iconImage = [[NSImage alloc] initWithContentsOfFile:iconFilePath];
     NSAssert(iconImage, @"");
     
-    void * jumboImageBuffer = malloc(4 * 512 * 512);
+    /*void * jumboImageBuffer = malloc(4 * 512 * 512);
     NSBitmapImageRep *bitmap = [[NSBitmapImageRep alloc] initWithBitmapDataPlanes:(unsigned char **)&jumboImageBuffer pixelsWide:512 pixelsHigh:512 bitsPerSample:8 samplesPerPixel:4 hasAlpha:YES isPlanar:NO colorSpaceName:NSCalibratedRGBColorSpace bytesPerRow:512*4 bitsPerPixel:32];
     NSGraphicsContext *gContext = [NSGraphicsContext graphicsContextWithBitmapImageRep:bitmap];
     [NSGraphicsContext setCurrentContext:gContext];
     [iconImage drawInRect:NSMakeRect(0.0, 0.0, 512.0, 512.0) fromRect:NSMakeRect(0.0, 0.0, [iconImage size].width, [iconImage size].height) operation:NSCompositeCopy fraction:1.0];
-    self.nextJumboIcon = jumboImageBuffer;
+    self.nextJumboIcon = jumboImageBuffer;*/
     
     void * imageBuffer = malloc(4 * 128 * 128);
-    bitmap = [[NSBitmapImageRep alloc] initWithBitmapDataPlanes:(unsigned char **)&imageBuffer pixelsWide:128 pixelsHigh:128 bitsPerSample:8 samplesPerPixel:4 hasAlpha:YES isPlanar:NO colorSpaceName:NSCalibratedRGBColorSpace bytesPerRow:128*4 bitsPerPixel:32];
-    gContext = [NSGraphicsContext graphicsContextWithBitmapImageRep:bitmap];
+    NSBitmapImageRep *bitmap = [[NSBitmapImageRep alloc] initWithBitmapDataPlanes:(unsigned char **)&imageBuffer pixelsWide:128 pixelsHigh:128 bitsPerSample:8 samplesPerPixel:4 hasAlpha:YES isPlanar:NO colorSpaceName:NSCalibratedRGBColorSpace bytesPerRow:128*4 bitsPerPixel:32];
+    NSGraphicsContext *gContext = [NSGraphicsContext graphicsContextWithBitmapImageRep:bitmap];
     [NSGraphicsContext setCurrentContext:gContext];
     [iconImage drawInRect:NSMakeRect(0.0, 0.0, 128.0, 128.0) fromRect:NSMakeRect(0.0, 0.0, [iconImage size].width, [iconImage size].height) operation:NSCompositeCopy fraction:1.0];
     self.nextIcon = imageBuffer;
@@ -138,7 +138,7 @@ int iconCallback(void * callbackContext, struct flyingIconImage ** images )
     
     [self performSelectorInBackground:@selector(getNextIcon) withObject:nil];
     
-    return 4;
+    return 3;
 }
 
 @end
