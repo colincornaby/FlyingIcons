@@ -117,48 +117,33 @@ void iconDestructor(struct flyingIcon *icon, void *context) {
         {
             float xPos, yPos, scale, rotation, alpha;
             currentStateOfFlyingIcon(icon, &xPos, &yPos, &scale, &rotation, &alpha, self.driver.iconsContext);
+            rotation = (rotation/180.0f) * M_PI;
             long iconSpawnTime = ((icon->spawnTime.tv_sec) * 1000 + icon->spawnTime.tv_usec/1000.0) + 0.5;
             
             struct Uniforms uniforms;
             uniforms.transform = matrix_identity_float4x4;
-            uniforms.transform.columns[0][3] = xPos;
-            uniforms.transform.columns[1][3] = yPos;
-            uniforms.transform.columns[0][0] = 1.0/aspectRatio;
-            uniforms.transform.columns[1][1] = 1.0;
-            uniforms.transform.columns[2][2] = 1.0;
             if(rotation != 0){
                 matrix_float4x4 inverseTranslateMatrix = matrix_identity_float4x4;
-                inverseTranslateMatrix.columns[3][0] = -xPos;
-                inverseTranslateMatrix.columns[3][1] = -yPos;
                 inverseTranslateMatrix.columns[3][2] = 1;
                 matrix_float4x4 rotationMatrix = matrix_identity_float4x4;
+                rotationMatrix.columns[0][0] = cosf(rotation);
+                rotationMatrix.columns[0][1] = sinf(rotation);
+                rotationMatrix.columns[1][0] = -sinf(rotation);
                 rotationMatrix.columns[1][1] = cosf(rotation);
-                rotationMatrix.columns[1][2] = sinf(rotation);
-                rotationMatrix.columns[2][1] = -sinf(rotation);
-                rotationMatrix.columns[2][2] = cosf(rotation);
-                matrix_float4x4 translateMatrix = matrix_identity_float4x4;
-                translateMatrix.columns[3][0] = xPos;
-                translateMatrix.columns[3][1] = yPos;
                 uniforms.transform = matrix_multiply(uniforms.transform, rotationMatrix);
-                NSLog(@"Rotate");
                 //uniforms.transform = matrix_multiply(uniforms.transform,
                                                      //matrix_multiply(translateMatrix,
                                                                      //matrix_multiply(rotationMatrix, //inverseTranslateMatrix)));
-            
-                
-                uniforms.alpha = alpha;
-            } else {
-            
-                uniforms.alpha = alpha;
             }
+            matrix_float4x4 translationAndScaleMatrix = matrix_identity_float4x4;
+            translationAndScaleMatrix.columns[0][3] = xPos;
+            translationAndScaleMatrix.columns[1][3] = yPos;
+            translationAndScaleMatrix.columns[0][0] = 1.0/aspectRatio;
+            translationAndScaleMatrix.columns[1][1] = 1.0;
+            translationAndScaleMatrix.columns[2][2] = 1.0;
+            uniforms.transform = matrix_multiply(uniforms.transform, translationAndScaleMatrix);
+            uniforms.alpha = alpha;
             if(alpha != 0) {
-                //glTranslatef(xPos, yPos, 0.0);
-                
-                //if(rotation!=0)
-                //{
-                //    glRotatef((GLfloat) rotation, 0.0, 0.0, 1.0);
-                //}
-                //glScalef(scale, scale, 0.0f);
                 iconSpawnTime = -1.0;
                                                //(xPos, yPos, 0.0f, 0.0f));
                 xPos = 0;
