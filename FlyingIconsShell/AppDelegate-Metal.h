@@ -7,12 +7,12 @@
 #import <Cocoa/Cocoa.h>
 #import <MetalKit/MetalKit.h>
 #import "FlyingIconsDriver.h"
+#import "FlyingIconsMetalView.h"
 
-@interface AppDelegate : NSObject <NSApplicationDelegate, NSWindowDelegate, MTKViewDelegate>
+@interface AppDelegate : NSObject <NSApplicationDelegate, NSWindowDelegate>
 
 @property FlyingIconsDriver *driver;
 @property (assign) IBOutlet NSWindow *window;
-@property (assign) CVDisplayLinkRef displayLink;
-@property (assign) IBOutlet MTKView *metalView;
+@property (assign) IBOutlet FlyingIconsMetalView *metalView;
 
 @end

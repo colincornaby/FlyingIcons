@@ -41,6 +41,7 @@
 #import <Metal/Metal.h>
 #import <Cocoa/Cocoa.h>
 #import "FlyingIconsGLView.h"
+#import "FlyingIconsMetalView.h"
 
 @implementation Flying_Icons_ScreensaverView
 
@@ -52,13 +53,14 @@
     if (self) {
         [self setAnimationTimeInterval:1/30.0];
         id<MTLDevice> metalDevice = MTLCreateSystemDefaultDevice();
-        //if(metalDevice) {
-            
-       // } else {
+        if(metalDevice) {
+            self.renderView = [[FlyingIconsMetalView alloc] initWithFrame:self.bounds];
+            ((FlyingIconsMetalView *)self.renderView).device = metalDevice;
+        } else {
             self.renderView = [[FlyingIconsGLView alloc] initWithFrame:self.bounds];
-            [self addSubview:self.renderView];
-            [self.renderView setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
-       // }
+        }
+        [self addSubview:self.renderView];
+        [self.renderView setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
         self.driver = [[FlyingIconsDriver alloc] init] ;
         self.renderView.driver = self.driver;
         [self.driver start];

@@ -30,6 +30,11 @@
 		31EBB95021799E5B002A10D2 /* MainMenu-OpenGL.xib in Resources */ = {isa = PBXBuildFile; fileRef = 316CB7A0148ABC9A0061F45E /* MainMenu-OpenGL.xib */; };
 		31EBB95921799EDB002A10D2 /* MainMenu-Metal.xib in Resources */ = {isa = PBXBuildFile; fileRef = 31EBB95721799EDB002A10D2 /* MainMenu-Metal.xib */; };
 		31EBB95E2179A072002A10D2 /* AppDelegate-Metal.m in Sources */ = {isa = PBXBuildFile; fileRef = 31EBB95C2179A063002A10D2 /* AppDelegate-Metal.m */; };
+		31F3AA2523BAFBA6005AA2F4 /* FlyingIconsMetalRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 31F3AA2423BAFBA6005AA2F4 /* FlyingIconsMetalRenderer.m */; };
+		31F3AA2823BB0F77005AA2F4 /* FlyingIconsMetalView.h in Headers */ = {isa = PBXBuildFile; fileRef = 31F3AA2623BB0F77005AA2F4 /* FlyingIconsMetalView.h */; };
+		31F3AA2923BB0F77005AA2F4 /* FlyingIconsMetalView.m in Sources */ = {isa = PBXBuildFile; fileRef = 31F3AA2723BB0F77005AA2F4 /* FlyingIconsMetalView.m */; };
+		31F3AA2A23BB0F77005AA2F4 /* FlyingIconsMetalView.m in Sources */ = {isa = PBXBuildFile; fileRef = 31F3AA2723BB0F77005AA2F4 /* FlyingIconsMetalView.m */; };
+		31F3AA2B23BB0F84005AA2F4 /* FlyingIconsMetalRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 31F3AA2423BAFBA6005AA2F4 /* FlyingIconsMetalRenderer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +67,10 @@
 		31EBB95821799EDB002A10D2 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = "en.lproj/MainMenu-Metal.xib"; sourceTree = "<group>"; };
 		31EBB95C2179A063002A10D2 /* AppDelegate-Metal.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "AppDelegate-Metal.m"; sourceTree = "<group>"; };
 		31EBB95D2179A063002A10D2 /* AppDelegate-Metal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AppDelegate-Metal.h"; sourceTree = "<group>"; };
+		31F3AA2323BAFBA6005AA2F4 /* FlyingIconsMetalRenderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FlyingIconsMetalRenderer.h; sourceTree = "<group>"; };
+		31F3AA2423BAFBA6005AA2F4 /* FlyingIconsMetalRenderer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FlyingIconsMetalRenderer.m; sourceTree = "<group>"; };
+		31F3AA2623BB0F77005AA2F4 /* FlyingIconsMetalView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FlyingIconsMetalView.h; sourceTree = "<group>"; };
+		31F3AA2723BB0F77005AA2F4 /* FlyingIconsMetalView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FlyingIconsMetalView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +97,8 @@
 			isa = PBXGroup;
 			children = (
 				311543AD217AA7BA003A7568 /* Shaders.metal */,
+				31F3AA2323BAFBA6005AA2F4 /* FlyingIconsMetalRenderer.h */,
+				31F3AA2423BAFBA6005AA2F4 /* FlyingIconsMetalRenderer.m */,
 			);
 			path = "FlyingIcons-Metal";
 			sourceTree = "<group>";
@@ -120,6 +131,8 @@
 				3117C28C23B9C06200AC2962 /* FlyingIconsGLView.h */,
 				3117C28D23B9C06200AC2962 /* FlyingIconsGLView.m */,
 				3117C29123B9C0AE00AC2962 /* FlyingIconsRendering.h */,
+				31F3AA2623BB0F77005AA2F4 /* FlyingIconsMetalView.h */,
+				31F3AA2723BB0F77005AA2F4 /* FlyingIconsMetalView.m */,
 			);
 			path = "Mac Views";
 			sourceTree = "<group>";
@@ -208,6 +221,7 @@
 			files = (
 				3117C28E23B9C06200AC2962 /* FlyingIconsGLView.h in Headers */,
 				3117C27023B99D7000AC2962 /* FlyingIcons-Mac.h in Headers */,
+				31F3AA2823BB0F77005AA2F4 /* FlyingIconsMetalView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -337,6 +351,8 @@
 			files = (
 				311543AE217AA7BA003A7568 /* Shaders.metal in Sources */,
 				3117C27123B99D7000AC2962 /* FlyingIcons-Mac.c in Sources */,
+				31F3AA2923BB0F77005AA2F4 /* FlyingIconsMetalView.m in Sources */,
+				31F3AA2523BAFBA6005AA2F4 /* FlyingIconsMetalRenderer.m in Sources */,
 				316CB7A9148ABF330061F45E /* FlyingIcons.c in Sources */,
 				31EBB95E2179A072002A10D2 /* AppDelegate-Metal.m in Sources */,
 				31BF595F148B712E004F89D0 /* FlyingIconsDriver.m in Sources */,
@@ -351,6 +367,8 @@
 				3117C29323B9C5E500AC2962 /* FlyingIconsGL.c in Sources */,
 				3117C28F23B9C06200AC2962 /* FlyingIconsGLView.m in Sources */,
 				3117C27223B99D7000AC2962 /* FlyingIcons-Mac.c in Sources */,
+				31F3AA2A23BB0F77005AA2F4 /* FlyingIconsMetalView.m in Sources */,
+				31F3AA2B23BB0F84005AA2F4 /* FlyingIconsMetalRenderer.m in Sources */,
 				31BF5978148B7350004F89D0 /* FlyingIconsDriver.m in Sources */,
 				31BF5979148B7352004F89D0 /* FlyingIcons.c in Sources */,
 				3117C27723B9BBCA00AC2962 /* Shaders.metal in Sources */,

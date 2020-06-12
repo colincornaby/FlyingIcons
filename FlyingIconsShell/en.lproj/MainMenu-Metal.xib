@@ -659,7 +659,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="480" height="360"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="N4m-6w-RCn" customClass="MTKView">
+                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="N4m-6w-RCn" customClass="FlyingIconsMetalView">
                         <rect key="frame" x="0.0" y="0.0" width="480" height="360"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     </customView>
