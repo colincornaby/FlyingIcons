@@ -10,10 +10,12 @@
 #import <Metal/Metal.h>
 #import <simd/simd.h>
 #import "FlyingIcons-Mac.h"
+#import "ResourceLoader.hpp"
 
 @interface FlyingIconsMetalRenderer ()
 @property id<MTLDevice> device;
 @property id<MTLRenderPipelineState> pipelineState;
+@property FlyingIcons::ResourceLoader resourceLoader;
 @end
 
 @implementation FlyingIconsMetalRenderer
@@ -26,6 +28,9 @@ struct Uniforms
 
 -(id)initWithDevice:(id<MTLDevice>)device {
     self = [super init];
+    _resourceLoader.resourceAllocator = &MetalResourceAllocator;
+    _resourceLoader.resourceDeallocator = &MetalResourceDeallocator;
+    _resourceLoader.context = (__bridge void *) self;
     self.device = device;
     return self;
 }
@@ -33,8 +38,6 @@ struct Uniforms
 -(void)render:(MTLRenderPassDescriptor *)renderPassDescriptor commandBuffer:(id<MTLCommandBuffer>)commandBuffer
 {
     self.driver.iconsContext->constructorDestructorCallback = (__bridge void *)self;
-    self.driver.iconsContext->constructorCallback = &iconConstructorMTL;
-    self.driver.iconsContext->destructorCallback = &iconDestructorMTL;
     if(!self.pipelineState) {
         id<MTLLibrary> library = [self.device newDefaultLibraryWithBundle:[NSBundle bundleForClass:self.class] error:nil];
         MTLRenderPipelineDescriptor *pipelineDescriptor = [[MTLRenderPipelineDescriptor alloc] init];
@@ -81,7 +84,8 @@ struct Uniforms
     
     id<MTLRenderCommandEncoder> renderCommandEncoder = [commandBuffer renderCommandEncoderWithDescriptor:renderPassDescriptor];
     [renderCommandEncoder setRenderPipelineState:self.pipelineState];
-
+    
+    _resourceLoader.updateForContext(self.driver.iconsContext);
     struct flyingIcon * icon = self.driver.iconsContext->firstIcon;
     while(icon!=NULL)
     {
@@ -114,7 +118,8 @@ struct Uniforms
             [renderCommandEncoder setVertexBytes:(void *)vertices length:sizeof(float) * 18 atIndex:0];
             [renderCommandEncoder setVertexBytes:(void *)texVertices length:sizeof(float) * 12 atIndex:1];
             [renderCommandEncoder setVertexBuffer:transformBuffer offset:0 atIndex:2];
-            [renderCommandEncoder setFragmentTexture:(__bridge id<MTLTexture>)icon->userData atIndex:0];
+            id<MTLTexture> texture = (__bridge id<MTLTexture>) _resourceLoader[icon->identifier];
+            [renderCommandEncoder setFragmentTexture:texture atIndex:0];
             [renderCommandEncoder drawPrimitives:MTLPrimitiveTypeTriangleStrip vertexStart:0 vertexCount:6];
             
         }
@@ -123,21 +128,19 @@ struct Uniforms
     [renderCommandEncoder endEncoding];
 }
 
-
-
-void iconConstructorMTL(struct flyingIcon *icon, struct flyingIconImage * images, unsigned int imageCount, void *context) {
+void * MetalResourceAllocator(void * context, flyingIcon *icon)
+{
     FlyingIconsMetalRenderer *self = (__bridge FlyingIconsMetalRenderer *)context;
-    struct flyingIconImage image = images[0];
-    MTLTextureDescriptor *textureDescriptor = [MTLTextureDescriptor texture2DDescriptorWithPixelFormat:MTLPixelFormatRGBA8Unorm width:image.width height:image.height mipmapped:NO];
+    MTLTextureDescriptor *textureDescriptor = [MTLTextureDescriptor texture2DDescriptorWithPixelFormat:MTLPixelFormatRGBA8Unorm width:icon->width height:icon->height mipmapped:NO];
     id<MTLTexture> texture = [self.device newTextureWithDescriptor:textureDescriptor];
-    [texture replaceRegion:MTLRegionMake2D(0, 0, image.width, image.height) mipmapLevel:0 withBytes:image.imageBuffer bytesPerRow:image.width * 4];
-    icon->userData = (void *) CFBridgingRetain(texture);
+    [texture replaceRegion:MTLRegionMake2D(0, 0, icon->width, icon->height) mipmapLevel:0 withBytes:icon->bitmapData bytesPerRow:icon->width * 4];
+    return (void *) CFBridgingRetain(texture);
 }
 
-
-void iconDestructorMTL(struct flyingIcon *icon, void *context) {
-    CFRelease((__bridge CFTypeRef)((__bridge id<MTLTexture>)icon->userData));
-    icon->userData = nil;
+void MetalResourceDeallocator(void * context, void * resource)
+{
+    id<MTLTexture> texture = (__bridge id<MTLTexture>)resource;
+    CFRelease((void *)texture);
 }
 
 @end

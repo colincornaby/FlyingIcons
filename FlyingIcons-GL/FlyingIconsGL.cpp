@@ -8,7 +8,7 @@
 
 //This file was intentionally kept at OpenGL 1.X for compatibility. With tools moving on I'm considering moving this to 2.X. But portability to older Macs was important when this was written.
 
-#include "FlyingIconsGL.h"
+#include "FlyingIconsGL.hpp"
 #include "FlyingIcons-Mac.h"
 #include <memory.h>
 #import <OpenGL/gl.h>
@@ -16,7 +16,7 @@
 void iconConstructor(struct flyingIcon *icon, struct flyingIconImage * images, unsigned int imageCount, void *context);
 void iconDestructor(struct flyingIcon *icon, void *context);
 
-void drawFlyingIcons(flyingIconsContextPtr context, float hRes, float vRes) {
+void drawFlyingIcons(flyingIconsContextPtr context, FlyingIcons::ResourceLoader &resourceLoader, float hRes, float vRes) {
     context->constructorCallback = &iconConstructor;
     context->destructorCallback = &iconDestructor;
     
@@ -114,21 +114,16 @@ void drawFlyingIcons(flyingIconsContextPtr context, float hRes, float vRes) {
     glFlush();
 }
 
-void iconConstructor(struct flyingIcon *icon, struct flyingIconImage * images, unsigned int imageCount, void *context) {
-    glGenTextures(1, (GLuint *)&(icon->userData));
+void * GLResourceallocator (void * context, flyingIcon *icon) {
+    GLuint texture;
+    glGenTextures(1, (GLuint *)&texture);
     glBindTexture(GL_TEXTURE_2D, (GLuint)icon->userData);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR_MIPMAP_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    int i = 0;
-    for(i=0;i<imageCount;i++)
-    {
-        struct flyingIconImage iconEntry = images[i];
-        glTexImage2D(GL_TEXTURE_2D, i, GL_RGBA8, iconEntry.width, iconEntry.height, 0, GL_RGBA, GL_UNSIGNED_BYTE, (const void *) iconEntry.imageBuffer);
-        i++;
-        //            if (iconEntry.imageBuffer != NULL) free(iconEntry.imageBuffer);
-    }
+    glTexImage2D(GL_TEXTURE_2D, i, GL_RGBA8, iconEntry.width, iconEntry.height, 0, GL_RGBA, GL_UNSIGNED_BYTE, (const void *) icon->bitmapData);
+    return (void *) (size_t) texture;
 }
 
 

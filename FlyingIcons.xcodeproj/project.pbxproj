@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		311543AB217A9024003A7568 /* FlyingIconsGL.c in Sources */ = {isa = PBXBuildFile; fileRef = 311543A9217A8ECC003A7568 /* FlyingIconsGL.c */; };
+		311543AB217A9024003A7568 /* FlyingIconsGL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 311543A9217A8ECC003A7568 /* FlyingIconsGL.cpp */; };
 		311543AE217AA7BA003A7568 /* Shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 311543AD217AA7BA003A7568 /* Shaders.metal */; };
 		3117C27023B99D7000AC2962 /* FlyingIcons-Mac.h in Headers */ = {isa = PBXBuildFile; fileRef = 3117C26E23B99D7000AC2962 /* FlyingIcons-Mac.h */; };
 		3117C27123B99D7000AC2962 /* FlyingIcons-Mac.c in Sources */ = {isa = PBXBuildFile; fileRef = 3117C26F23B99D7000AC2962 /* FlyingIcons-Mac.c */; };
@@ -16,37 +16,43 @@
 		3117C27623B9BB9700AC2962 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3117C27523B9BB9700AC2962 /* Metal.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		3117C27723B9BBCA00AC2962 /* Shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 311543AD217AA7BA003A7568 /* Shaders.metal */; };
 		3117C28E23B9C06200AC2962 /* FlyingIconsGLView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3117C28C23B9C06200AC2962 /* FlyingIconsGLView.h */; };
-		3117C28F23B9C06200AC2962 /* FlyingIconsGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3117C28D23B9C06200AC2962 /* FlyingIconsGLView.m */; };
-		3117C29023B9C06200AC2962 /* FlyingIconsGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3117C28D23B9C06200AC2962 /* FlyingIconsGLView.m */; };
-		3117C29323B9C5E500AC2962 /* FlyingIconsGL.c in Sources */ = {isa = PBXBuildFile; fileRef = 311543A9217A8ECC003A7568 /* FlyingIconsGL.c */; };
+		3117C28F23B9C06200AC2962 /* FlyingIconsGLView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3117C28D23B9C06200AC2962 /* FlyingIconsGLView.mm */; };
+		3117C29023B9C06200AC2962 /* FlyingIconsGLView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3117C28D23B9C06200AC2962 /* FlyingIconsGLView.mm */; };
+		3117C29323B9C5E500AC2962 /* FlyingIconsGL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 311543A9217A8ECC003A7568 /* FlyingIconsGL.cpp */; };
+		316C4DE22493415B00756F9C /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 316C4DE12493415B00756F9C /* MetalKit.framework */; };
+		316C4DE32493422100756F9C /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 316C4DE12493415B00756F9C /* MetalKit.framework */; };
+		316C4DE52493422A00756F9C /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 316C4DE42493422A00756F9C /* OpenGL.framework */; };
 		316CB7A9148ABF330061F45E /* FlyingIcons.c in Sources */ = {isa = PBXBuildFile; fileRef = 316CB7A8148ABF330061F45E /* FlyingIcons.c */; };
 		31BF595F148B712E004F89D0 /* FlyingIconsDriver.m in Sources */ = {isa = PBXBuildFile; fileRef = 31BF595E148B712E004F89D0 /* FlyingIconsDriver.m */; };
 		31BF5973148B72C7004F89D0 /* Flying_Icons_ScreensaverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 31BF5972148B72C7004F89D0 /* Flying_Icons_ScreensaverView.m */; };
 		31BF5978148B7350004F89D0 /* FlyingIconsDriver.m in Sources */ = {isa = PBXBuildFile; fileRef = 31BF595E148B712E004F89D0 /* FlyingIconsDriver.m */; };
 		31BF5979148B7352004F89D0 /* FlyingIcons.c in Sources */ = {isa = PBXBuildFile; fileRef = 316CB7A8148ABF330061F45E /* FlyingIcons.c */; };
+		31C8264F249488ED00673E11 /* ResourceLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 31C8264D249488ED00673E11 /* ResourceLoader.cpp */; };
 		31EBB94C21799E5B002A10D2 /* AppDelegate-OpenGL.m in Sources */ = {isa = PBXBuildFile; fileRef = 316CB79E148ABC9A0061F45E /* AppDelegate-OpenGL.m */; };
 		31EBB94D21799E5B002A10D2 /* FlyingIcons.c in Sources */ = {isa = PBXBuildFile; fileRef = 316CB7A8148ABF330061F45E /* FlyingIcons.c */; };
 		31EBB94E21799E5B002A10D2 /* FlyingIconsDriver.m in Sources */ = {isa = PBXBuildFile; fileRef = 31BF595E148B712E004F89D0 /* FlyingIconsDriver.m */; };
 		31EBB95021799E5B002A10D2 /* MainMenu-OpenGL.xib in Resources */ = {isa = PBXBuildFile; fileRef = 316CB7A0148ABC9A0061F45E /* MainMenu-OpenGL.xib */; };
 		31EBB95921799EDB002A10D2 /* MainMenu-Metal.xib in Resources */ = {isa = PBXBuildFile; fileRef = 31EBB95721799EDB002A10D2 /* MainMenu-Metal.xib */; };
 		31EBB95E2179A072002A10D2 /* AppDelegate-Metal.m in Sources */ = {isa = PBXBuildFile; fileRef = 31EBB95C2179A063002A10D2 /* AppDelegate-Metal.m */; };
-		31F3AA2523BAFBA6005AA2F4 /* FlyingIconsMetalRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 31F3AA2423BAFBA6005AA2F4 /* FlyingIconsMetalRenderer.m */; };
+		31F3AA2523BAFBA6005AA2F4 /* FlyingIconsMetalRenderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 31F3AA2423BAFBA6005AA2F4 /* FlyingIconsMetalRenderer.mm */; };
 		31F3AA2823BB0F77005AA2F4 /* FlyingIconsMetalView.h in Headers */ = {isa = PBXBuildFile; fileRef = 31F3AA2623BB0F77005AA2F4 /* FlyingIconsMetalView.h */; };
 		31F3AA2923BB0F77005AA2F4 /* FlyingIconsMetalView.m in Sources */ = {isa = PBXBuildFile; fileRef = 31F3AA2723BB0F77005AA2F4 /* FlyingIconsMetalView.m */; };
 		31F3AA2A23BB0F77005AA2F4 /* FlyingIconsMetalView.m in Sources */ = {isa = PBXBuildFile; fileRef = 31F3AA2723BB0F77005AA2F4 /* FlyingIconsMetalView.m */; };
-		31F3AA2B23BB0F84005AA2F4 /* FlyingIconsMetalRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 31F3AA2423BAFBA6005AA2F4 /* FlyingIconsMetalRenderer.m */; };
+		31F3AA2B23BB0F84005AA2F4 /* FlyingIconsMetalRenderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 31F3AA2423BAFBA6005AA2F4 /* FlyingIconsMetalRenderer.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		311543A8217A8ECC003A7568 /* FlyingIconsGL.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FlyingIconsGL.h; sourceTree = "<group>"; };
-		311543A9217A8ECC003A7568 /* FlyingIconsGL.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = FlyingIconsGL.c; sourceTree = "<group>"; };
+		311543A8217A8ECC003A7568 /* FlyingIconsGL.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = FlyingIconsGL.hpp; sourceTree = "<group>"; };
+		311543A9217A8ECC003A7568 /* FlyingIconsGL.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FlyingIconsGL.cpp; sourceTree = "<group>"; };
 		311543AD217AA7BA003A7568 /* Shaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Shaders.metal; sourceTree = "<group>"; };
 		3117C26E23B99D7000AC2962 /* FlyingIcons-Mac.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FlyingIcons-Mac.h"; sourceTree = "<group>"; };
 		3117C26F23B99D7000AC2962 /* FlyingIcons-Mac.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = "FlyingIcons-Mac.c"; sourceTree = "<group>"; };
 		3117C27523B9BB9700AC2962 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
 		3117C28C23B9C06200AC2962 /* FlyingIconsGLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlyingIconsGLView.h; sourceTree = "<group>"; };
-		3117C28D23B9C06200AC2962 /* FlyingIconsGLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlyingIconsGLView.m; sourceTree = "<group>"; };
+		3117C28D23B9C06200AC2962 /* FlyingIconsGLView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FlyingIconsGLView.mm; sourceTree = "<group>"; };
 		3117C29123B9C0AE00AC2962 /* FlyingIconsRendering.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FlyingIconsRendering.h; sourceTree = "<group>"; };
+		316C4DE12493415B00756F9C /* MetalKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MetalKit.framework; path = System/Library/Frameworks/MetalKit.framework; sourceTree = SDKROOT; };
+		316C4DE42493422A00756F9C /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		316CB787148ABC9A0061F45E /* FlyingIconsShell Metal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "FlyingIconsShell Metal.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		316CB793148ABC9A0061F45E /* FlyingIconsShell-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FlyingIconsShell-Info.plist"; sourceTree = "<group>"; };
 		316CB799148ABC9A0061F45E /* FlyingIconsShell-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FlyingIconsShell-Prefix.pch"; sourceTree = "<group>"; };
@@ -62,22 +68,34 @@
 		31BF5970148B72C7004F89D0 /* Flying Icons Screensaver-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Flying Icons Screensaver-Prefix.pch"; sourceTree = "<group>"; };
 		31BF5971148B72C7004F89D0 /* Flying_Icons_ScreensaverView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Flying_Icons_ScreensaverView.h; sourceTree = "<group>"; };
 		31BF5972148B72C7004F89D0 /* Flying_Icons_ScreensaverView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Flying_Icons_ScreensaverView.m; sourceTree = "<group>"; };
+		31C8264D249488ED00673E11 /* ResourceLoader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ResourceLoader.cpp; sourceTree = "<group>"; };
+		31C8264E249488ED00673E11 /* ResourceLoader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ResourceLoader.hpp; sourceTree = "<group>"; };
 		31EBB95421799E5B002A10D2 /* FlyingIconsShell OpenGL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "FlyingIconsShell OpenGL.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		31EBB95521799E5C002A10D2 /* FlyingIconsShell copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "FlyingIconsShell copy-Info.plist"; path = "/Users/colincornaby/Documents/Git Repositories/FlyingIcons/FlyingIconsShell copy-Info.plist"; sourceTree = "<absolute>"; };
 		31EBB95821799EDB002A10D2 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = "en.lproj/MainMenu-Metal.xib"; sourceTree = "<group>"; };
 		31EBB95C2179A063002A10D2 /* AppDelegate-Metal.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "AppDelegate-Metal.m"; sourceTree = "<group>"; };
 		31EBB95D2179A063002A10D2 /* AppDelegate-Metal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AppDelegate-Metal.h"; sourceTree = "<group>"; };
 		31F3AA2323BAFBA6005AA2F4 /* FlyingIconsMetalRenderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FlyingIconsMetalRenderer.h; sourceTree = "<group>"; };
-		31F3AA2423BAFBA6005AA2F4 /* FlyingIconsMetalRenderer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FlyingIconsMetalRenderer.m; sourceTree = "<group>"; };
+		31F3AA2423BAFBA6005AA2F4 /* FlyingIconsMetalRenderer.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = FlyingIconsMetalRenderer.mm; sourceTree = "<group>"; };
 		31F3AA2623BB0F77005AA2F4 /* FlyingIconsMetalView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FlyingIconsMetalView.h; sourceTree = "<group>"; };
 		31F3AA2723BB0F77005AA2F4 /* FlyingIconsMetalView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FlyingIconsMetalView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		316C4DE02493415500756F9C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				316C4DE22493415B00756F9C /* MetalKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		31BF5961148B72C7004F89D0 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				316C4DE52493422A00756F9C /* OpenGL.framework in Frameworks */,
+				316C4DE32493422100756F9C /* MetalKit.framework in Frameworks */,
 				3117C27623B9BB9700AC2962 /* Metal.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -88,6 +106,8 @@
 		3117C27423B9BB9700AC2962 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				316C4DE42493422A00756F9C /* OpenGL.framework */,
+				316C4DE12493415B00756F9C /* MetalKit.framework */,
 				3117C27523B9BB9700AC2962 /* Metal.framework */,
 			);
 			name = Frameworks;
@@ -98,7 +118,7 @@
 			children = (
 				311543AD217AA7BA003A7568 /* Shaders.metal */,
 				31F3AA2323BAFBA6005AA2F4 /* FlyingIconsMetalRenderer.h */,
-				31F3AA2423BAFBA6005AA2F4 /* FlyingIconsMetalRenderer.m */,
+				31F3AA2423BAFBA6005AA2F4 /* FlyingIconsMetalRenderer.mm */,
 			);
 			path = "FlyingIcons-Metal";
 			sourceTree = "<group>";
@@ -106,8 +126,8 @@
 		3117C27923B9BD3700AC2962 /* FlyingIcons-GL */ = {
 			isa = PBXGroup;
 			children = (
-				311543A8217A8ECC003A7568 /* FlyingIconsGL.h */,
-				311543A9217A8ECC003A7568 /* FlyingIconsGL.c */,
+				311543A8217A8ECC003A7568 /* FlyingIconsGL.hpp */,
+				311543A9217A8ECC003A7568 /* FlyingIconsGL.cpp */,
 			);
 			path = "FlyingIcons-GL";
 			sourceTree = "<group>";
@@ -121,6 +141,8 @@
 				3117C26F23B99D7000AC2962 /* FlyingIcons-Mac.c */,
 				31BF595D148B712D004F89D0 /* FlyingIconsDriver.h */,
 				31BF595E148B712E004F89D0 /* FlyingIconsDriver.m */,
+				31C8264E249488ED00673E11 /* ResourceLoader.hpp */,
+				31C8264D249488ED00673E11 /* ResourceLoader.cpp */,
 			);
 			path = FlyingIcons;
 			sourceTree = "<group>";
@@ -129,7 +151,7 @@
 			isa = PBXGroup;
 			children = (
 				3117C28C23B9C06200AC2962 /* FlyingIconsGLView.h */,
-				3117C28D23B9C06200AC2962 /* FlyingIconsGLView.m */,
+				3117C28D23B9C06200AC2962 /* FlyingIconsGLView.mm */,
 				3117C29123B9C0AE00AC2962 /* FlyingIconsRendering.h */,
 				31F3AA2623BB0F77005AA2F4 /* FlyingIconsMetalView.h */,
 				31F3AA2723BB0F77005AA2F4 /* FlyingIconsMetalView.m */,
@@ -234,6 +256,7 @@
 			buildPhases = (
 				316CB783148ABC9A0061F45E /* Sources */,
 				316CB785148ABC9A0061F45E /* Resources */,
+				316C4DE02493415500756F9C /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -285,7 +308,7 @@
 		316CB77E148ABC990061F45E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0610;
+				LastUpgradeCheck = 1150;
 				ORGANIZATIONNAME = "Consonance Software";
 			};
 			buildConfigurationList = 316CB781148ABC990061F45E /* Build configuration list for PBXProject "FlyingIcons" */;
@@ -351,8 +374,9 @@
 			files = (
 				311543AE217AA7BA003A7568 /* Shaders.metal in Sources */,
 				3117C27123B99D7000AC2962 /* FlyingIcons-Mac.c in Sources */,
+				31C8264F249488ED00673E11 /* ResourceLoader.cpp in Sources */,
 				31F3AA2923BB0F77005AA2F4 /* FlyingIconsMetalView.m in Sources */,
-				31F3AA2523BAFBA6005AA2F4 /* FlyingIconsMetalRenderer.m in Sources */,
+				31F3AA2523BAFBA6005AA2F4 /* FlyingIconsMetalRenderer.mm in Sources */,
 				316CB7A9148ABF330061F45E /* FlyingIcons.c in Sources */,
 				31EBB95E2179A072002A10D2 /* AppDelegate-Metal.m in Sources */,
 				31BF595F148B712E004F89D0 /* FlyingIconsDriver.m in Sources */,
@@ -364,11 +388,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				31BF5973148B72C7004F89D0 /* Flying_Icons_ScreensaverView.m in Sources */,
-				3117C29323B9C5E500AC2962 /* FlyingIconsGL.c in Sources */,
-				3117C28F23B9C06200AC2962 /* FlyingIconsGLView.m in Sources */,
+				3117C29323B9C5E500AC2962 /* FlyingIconsGL.cpp in Sources */,
+				3117C28F23B9C06200AC2962 /* FlyingIconsGLView.mm in Sources */,
 				3117C27223B99D7000AC2962 /* FlyingIcons-Mac.c in Sources */,
 				31F3AA2A23BB0F77005AA2F4 /* FlyingIconsMetalView.m in Sources */,
-				31F3AA2B23BB0F84005AA2F4 /* FlyingIconsMetalRenderer.m in Sources */,
+				31F3AA2B23BB0F84005AA2F4 /* FlyingIconsMetalRenderer.mm in Sources */,
 				31BF5978148B7350004F89D0 /* FlyingIconsDriver.m in Sources */,
 				31BF5979148B7352004F89D0 /* FlyingIcons.c in Sources */,
 				3117C27723B9BBCA00AC2962 /* Shaders.metal in Sources */,
@@ -379,8 +403,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				311543AB217A9024003A7568 /* FlyingIconsGL.c in Sources */,
-				3117C29023B9C06200AC2962 /* FlyingIconsGLView.m in Sources */,
+				311543AB217A9024003A7568 /* FlyingIconsGL.cpp in Sources */,
+				3117C29023B9C06200AC2962 /* FlyingIconsGLView.mm in Sources */,
 				3117C27323B99D7000AC2962 /* FlyingIcons-Mac.c in Sources */,
 				31EBB94C21799E5B002A10D2 /* AppDelegate-OpenGL.m in Sources */,
 				31EBB94D21799E5B002A10D2 /* FlyingIcons.c in Sources */,
@@ -415,15 +439,41 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = c11;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				ONLY_ACTIVE_ARCH = YES;
@@ -436,10 +486,35 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = c11;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				SDKROOT = macosx;
@@ -450,12 +525,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FlyingIconsShell/FlyingIconsShell-Prefix.pch";
 				INFOPLIST_FILE = "FlyingIconsShell/FlyingIconsShell-Info.plist";
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.colincornaby.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -465,11 +542,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FlyingIconsShell/FlyingIconsShell-Prefix.pch";
 				INFOPLIST_FILE = "FlyingIconsShell/FlyingIconsShell-Info.plist";
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.colincornaby.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -483,6 +562,7 @@
 				GCC_PREFIX_HEADER = "Flying Icons Screensaver/Flying Icons Screensaver-Prefix.pch";
 				INFOPLIST_FILE = "Flying Icons Screensaver/Flying Icons Screensaver-Info.plist";
 				INSTALL_PATH = "$(HOME)/Library/Screen Savers";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.consonancesw.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = saver;
 			};
@@ -496,6 +576,7 @@
 				GCC_PREFIX_HEADER = "Flying Icons Screensaver/Flying Icons Screensaver-Prefix.pch";
 				INFOPLIST_FILE = "Flying Icons Screensaver/Flying Icons Screensaver-Info.plist";
 				INSTALL_PATH = "$(HOME)/Library/Screen Savers";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.consonancesw.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = saver;
 			};
@@ -504,11 +585,14 @@
 		31EBB95221799E5B002A10D2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FlyingIconsShell/FlyingIconsShell-Prefix.pch";
 				INFOPLIST_FILE = "FlyingIconsShell copy-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.colincornaby.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -517,11 +601,14 @@
 		31EBB95321799E5B002A10D2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FlyingIconsShell/FlyingIconsShell-Prefix.pch";
 				INFOPLIST_FILE = "FlyingIconsShell copy-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.colincornaby.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

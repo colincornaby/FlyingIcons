@@ -11,7 +11,8 @@
 
 #import "FlyingIcons.h"
 #include <stdio.h>
+#include "ResourceLoader.hpp"
 
-void drawFlyingIcons(flyingIconsContextPtr context, float hRes, float vRes);
+void drawFlyingIcons(flyingIconsContextPtr context, FlyingIcons::ResourceLoader &resourceLoader, float hRes, float vRes);
 
 #endif /* FlyingIconsGL_h */

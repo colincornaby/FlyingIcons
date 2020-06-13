@@ -105,35 +105,28 @@ flyingIconsContextPtr newFlyingIconsContext(void) {
 }
 
 void setFlyingIconsContextCallback(flyingIconsContextPtr   context,
-                                    int (*callBack)(void * context, struct flyingIconImage ** images),
+                                    struct flyingIconImage * (*callBack)(void * context),
                                                     void * callbackContext) {
     context->callbackContext = callbackContext;
     context->iconGetter = callBack;
 }
 
 void destroyIcon(struct flyingIcon * icon, flyingIconsContextPtr context)      {
-    context->destructorCallback(icon, context->constructorDestructorCallback);
     free(icon);
 }
 
 struct flyingIcon * createFlyingIcon(float xBias);
 
 void addNewIcon(flyingIconsContextPtr context)  {
-    struct flyingIconImage * images;
-    int iconCount = context->iconGetter(context->callbackContext, &images);
-    if(iconCount)
+    struct flyingIconImage *image = context->iconGetter(context->callbackContext);
+    if(image)
     {
         struct flyingIcon * newIcon = createFlyingIcon(context->xBias);
-        context->constructorCallback(newIcon, images, iconCount, context->constructorDestructorCallback);
-        //Have to go back and free each image buffer individually
-        //Memory management for these images is getting weird
-        int bufferToFree = 0;
-        for(bufferToFree=0; bufferToFree < iconCount; bufferToFree++) {
-            if(images[bufferToFree].imageBuffer) {
-                free(images[bufferToFree].imageBuffer);
-            }
-        }
-        free(images);
+        newIcon->bitmapData = image->imageBuffer;
+        newIcon->width = image->width;
+        newIcon->height = image->height;
+        newIcon->identifier = context->currentIconNum;
+        free(image);
         context->currentIconNum++;
         newIcon->nextIcon = NULL;
         struct timeval spawnTime;

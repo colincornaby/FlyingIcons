@@ -13,6 +13,10 @@
 
 #endif
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 struct flyingIconImage
 {
     void * imageBuffer;
@@ -29,11 +33,9 @@ struct flyingIcon
     struct timeval spawnTime;
     int twirl;
     struct flyingIcon *nextIcon;
-    void *userData;
+    unsigned int identifier;
+    void *bitmapData;
 };
-
-typedef void(*iconConstructorCallbackRef)(struct flyingIcon *, struct flyingIconImage *, unsigned int, void *);
-typedef void(*iconDestructorCallbackRef)(struct flyingIcon *, void *);
 
 struct flyingIconsContext
 {
@@ -41,11 +43,9 @@ struct flyingIconsContext
     int currentIconNum;
     struct flyingIcon *firstIcon;
     float xBias;
-    int (*iconGetter)(void * context, struct flyingIconImage ** images);
+    struct flyingIconImage * (*iconGetter)(void * context);
     void * callbackContext;
     void * constructorDestructorCallback;
-    iconConstructorCallbackRef constructorCallback;
-    iconDestructorCallbackRef destructorCallback;
     struct timeval currTime;
 };
 typedef struct flyingIconsContext * flyingIconsContextPtr;
@@ -56,5 +56,9 @@ void currentStateOfFlyingIcon(struct flyingIcon *icon, float *x, float *y, float
 
 
 flyingIconsContextPtr newFlyingIconsContext(void);
-void setFlyingIconsContextCallback(flyingIconsContextPtr context, int (*callBack)(void * context, struct flyingIconImage ** images), void * callbackContext);
+void setFlyingIconsContextCallback(flyingIconsContextPtr   context, struct flyingIconImage * (*callBack)(void * context), void * callbackContext);
 void destroyFlyingIconsContext(flyingIconsContextPtr context);
+
+#ifdef __cplusplus
+}
+#endif

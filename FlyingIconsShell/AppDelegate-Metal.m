@@ -4,6 +4,9 @@
 //
 
 #import "AppDelegate-Metal.h"
+#import "FlyingIcons-Mac.h"
+#import <Metal/Metal.h>
+#import <MetalKit/MetalKit.h>
 
 @interface AppDelegate ()
 @property id<MTLDevice> device;
@@ -17,7 +20,8 @@
 {
     self.window.delegate = self;
     
-    self.device = MTLCreateSystemDefaultDevice();
+    NSNumber *screenID = self.window.screen.deviceDescription[@"NSScreenNumber"];
+    self.device = CGDirectDisplayCopyCurrentMetalDevice([screenID intValue]);
     self.metalView.device = self.device;
     self.metalView.sampleCount = 2;
     

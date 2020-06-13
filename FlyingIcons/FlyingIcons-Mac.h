@@ -13,6 +13,15 @@
 #include "FlyingIcons.h"
 #import <simd/simd.h>
 
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 void currentMatrixStateOfFlyingIcon(struct flyingIcon *icon, matrix_float4x4 *transform, float *alpha, flyingIconsContextPtr context);
+
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* FlyingIcons_Mac_h */
