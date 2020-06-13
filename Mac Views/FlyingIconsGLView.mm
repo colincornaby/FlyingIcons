@@ -8,6 +8,14 @@
 
 #import "FlyingIconsGLView.h"
 #import <OpenGL/gl.h>
+#import "ResourceLoader.hpp"
+#import "FlyingIconsGL.hpp"
+
+@interface FlyingIconsGLView ()
+
+@property FlyingIcons::ResourceLoader resourceLoader;
+
+@end
 
 @implementation FlyingIconsGLView
 
@@ -60,8 +68,7 @@
         [glContext makeCurrentContext];
         GLint dims[4] = {0};
         glGetIntegerv(GL_VIEWPORT, dims);
-        NSLog(@"Rendering at %f, %F into context %p", self.bounds.size.width, self.bounds.size.height, self.driver.iconsContext);
-        drawFlyingIcons(self.driver.iconsContext, dims[2], dims[3]);
+        drawFlyingIcons(self.driver.iconsContext, _resourceLoader, dims[2], dims[3]);
         [glContext flushBuffer];
         CGLUnlockContext(glContext.CGLContextObj);
     }

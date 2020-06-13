@@ -15,10 +15,12 @@
 
 void iconConstructor(struct flyingIcon *icon, struct flyingIconImage * images, unsigned int imageCount, void *context);
 void iconDestructor(struct flyingIcon *icon, void *context);
+void * GLResourceAllocator (void * context, flyingIcon *icon);
+void GLResourceDeallocator (void * context, void * resource);
 
 void drawFlyingIcons(flyingIconsContextPtr context, FlyingIcons::ResourceLoader &resourceLoader, float hRes, float vRes) {
-    context->constructorCallback = &iconConstructor;
-    context->destructorCallback = &iconDestructor;
+    resourceLoader.resourceAllocator = &GLResourceAllocator;
+    resourceLoader.resourceDeallocator = &GLResourceDeallocator;
     
     glEnable(GL_TEXTURE_2D);
     
@@ -55,6 +57,7 @@ void drawFlyingIcons(flyingIconsContextPtr context, FlyingIcons::ResourceLoader 
     gettimeofday(&currTime, NULL);
     
     prepareContext(context, currTime);
+    resourceLoader.updateForContext(context);
     
     struct flyingIcon * icon = context->firstIcon;
     struct flyingIcon *lastIcon = NULL;
@@ -96,7 +99,7 @@ void drawFlyingIcons(flyingIconsContextPtr context, FlyingIcons::ResourceLoader 
             glColorPointer(4, GL_FLOAT, 0, colors);
             glTexCoordPointer(2, GL_FLOAT, 0, texVertices);
             
-            glBindTexture(GL_TEXTURE_2D, (GLuint)icon->userData);
+            glBindTexture(GL_TEXTURE_2D, (GLuint) (size_t) resourceLoader[icon->identifier]);
             
             glDrawArrays(GL_QUADS, 0, 4);
             
@@ -114,20 +117,23 @@ void drawFlyingIcons(flyingIconsContextPtr context, FlyingIcons::ResourceLoader 
     glFlush();
 }
 
-void * GLResourceallocator (void * context, flyingIcon *icon) {
+
+void * GLResourceAllocator (void * context, flyingIcon *icon)
+{
     GLuint texture;
     glGenTextures(1, (GLuint *)&texture);
-    glBindTexture(GL_TEXTURE_2D, (GLuint)icon->userData);
+    glBindTexture(GL_TEXTURE_2D, texture);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR_MIPMAP_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexImage2D(GL_TEXTURE_2D, i, GL_RGBA8, iconEntry.width, iconEntry.height, 0, GL_RGBA, GL_UNSIGNED_BYTE, (const void *) icon->bitmapData);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, icon->width, icon->height, 0, GL_RGBA, GL_UNSIGNED_BYTE, (const void *) icon->bitmapData);
     return (void *) (size_t) texture;
 }
 
 
-void iconDestructor(struct flyingIcon *icon, void *context) {
-    GLuint textureID = (GLuint) icon->userData;
+void GLResourceDeallocator (void * context, void * resource)
+{
+    GLuint textureID = (GLuint) (size_t) resource;
     glDeleteTextures(1, &textureID);
 }

@@ -8,7 +8,7 @@
  */
 
 #import <Foundation/Foundation.h>
-#import "FlyingIconsGL.h"
+#import "FlyingIcons.h"
 
 @interface FlyingIconsDriver : NSObject <NSMetadataQueryDelegate>
 

@@ -37,6 +37,7 @@
  */
 
 #import "FlyingIconsDriver.h"
+#import "FlyingIconsGL.hpp"
 
 @implementation FlyingIconsDriver
 
@@ -45,7 +46,7 @@ struct flyingIconImage * iconCallback(void * callbackContext);
 -(void) start {
 
     srand((unsigned)time(0));
-    self.query = NSMetadataQuery.new;
+    self.query = [NSMetadataQuery new];
     _query.predicate = [NSPredicate predicateWithFormat:@"kMDItemKind == 'Application'"];
     _query.delegate = self;
     [_query startQuery];
@@ -75,7 +76,6 @@ struct flyingIconImage * iconCallback(void * callbackContext);
             iconFilePath = [appBundle pathForImageResource:iconFileName];
     }
     NSImage * iconImage = [[NSImage alloc] initWithContentsOfFile:iconFilePath];
-    NSAssert(iconImage, @"");
     
     /*void * jumboImageBuffer = malloc(4 * 512 * 512);
     NSBitmapImageRep *bitmap = [[NSBitmapImageRep alloc] initWithBitmapDataPlanes:(unsigned char **)&jumboImageBuffer pixelsWide:512 pixelsHigh:512 bitsPerSample:8 samplesPerPixel:4 hasAlpha:YES isPlanar:NO colorSpaceName:NSCalibratedRGBColorSpace bytesPerRow:512*4 bitsPerPixel:32];
@@ -98,7 +98,7 @@ struct flyingIconImage * iconCallback(void * callbackContext)
     if(!self.nextIcon)
         return 0;
     
-    struct flyingIconImage * image = malloc(sizeof(struct flyingIconImage));
+    struct flyingIconImage * image = (struct flyingIconImage *) malloc(sizeof(struct flyingIconImage));
     
     image->width = 128;
     image->height = 128;

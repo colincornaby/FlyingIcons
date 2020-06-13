@@ -5,7 +5,6 @@
 //  Created by Colin Cornaby on 12/3/11.
 
 #import <Cocoa/Cocoa.h>
-#import "FlyingIconsDriver.h"
 #import "FlyingIconsGLView.h"
 
 @interface AppDelegate : NSObject <NSApplicationDelegate, NSWindowDelegate>
