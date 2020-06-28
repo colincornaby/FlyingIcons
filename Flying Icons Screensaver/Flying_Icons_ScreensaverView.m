@@ -43,6 +43,17 @@
 #import "FlyingIconsGLView.h"
 #import "FlyingIconsMetalView.h"
 
+@interface ScreenSaverConfigurationWindowController: ConfigurationWindowController
+@end
+
+@implementation ScreenSaverConfigurationWindowController
+
+-(void)dismissController:(id)sender {
+    [NSApp endSheet:self.window];
+}
+
+@end
+
 @implementation Flying_Icons_ScreensaverView
 
 @synthesize  driver = _driver;
@@ -64,6 +75,9 @@
         self.driver = [[FlyingIconsDriver alloc] init] ;
         self.renderView.driver = self.driver;
         [self.driver start];
+        
+        self.configurationWindowController = [[ScreenSaverConfigurationWindowController alloc] initWithWindowNibName:@"ConfigurationWindowController"];
+        self.configurationWindowController.context = self.driver.iconsContext;
     }
     return self;
 }
@@ -93,12 +107,12 @@
 
 - (BOOL)hasConfigureSheet
 {
-    return NO;
+    return YES;
 }
 
 - (NSWindow*)configureSheet
 {
-    return nil;
+    return self.configurationWindowController.window;
 }
 
 -(void)dealloc

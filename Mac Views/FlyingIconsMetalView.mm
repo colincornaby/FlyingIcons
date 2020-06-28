@@ -9,7 +9,6 @@
 #import "FlyingIconsMetalView.h"
 #import "FlyingIconsMetalRenderer.h"
 #import <Metal/Metal.h>
-#import "FlyingIcons-Mac.h"
 
 
 @interface FlyingIconsMetalView ()
@@ -19,7 +18,7 @@
 
 @implementation FlyingIconsMetalView
 
-@synthesize driver;
+@synthesize context;
 
 -(id)initWithFrame:(CGRect)frameRect device:(id<MTLDevice>)device {
     self = [super initWithFrame:frameRect device:device];
@@ -34,17 +33,13 @@
     if(!self.commandQueue) {
         self.commandQueue = self.device.newCommandQueue;
     }
-    self.renderer.driver = self.driver;
+    self.renderer.context = self.context;
     
     MTLRenderPassDescriptor *renderPassDescriptor = self.currentRenderPassDescriptor;
     
     renderPassDescriptor.colorAttachments[0].clearColor = MTLClearColorMake(0.0, 0.0, 0.0, 1.0);
     if(renderPassDescriptor != nil) {
         id<MTLCommandBuffer> commandBuffer = [self.commandQueue commandBuffer];
-        
-        
-        float aspectRatio = ((float)renderPassDescriptor.colorAttachments[0].texture.width)/((float)renderPassDescriptor.colorAttachments[0].texture.height);
-        self.driver.iconsContext->xBias = aspectRatio;
         
         
         [self.renderer render:renderPassDescriptor commandBuffer:commandBuffer];

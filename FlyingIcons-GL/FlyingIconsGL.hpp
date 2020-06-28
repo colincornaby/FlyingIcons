@@ -9,10 +9,10 @@
 #ifndef FlyingIconsGL_h
 #define FlyingIconsGL_h
 
-#import "FlyingIcons.h"
+#import "FlyingIcons.hpp"
 #include <stdio.h>
 #include "ResourceLoader.hpp"
 
-void drawFlyingIcons(flyingIconsContextPtr context, FlyingIcons::ResourceLoader &resourceLoader, float hRes, float vRes);
+void drawFlyingIcons(FlyingIcons::FlyingIconsContext &context, FlyingIcons::ResourceLoader &resourceLoader, float hRes, float vRes);
 
 #endif /* FlyingIconsGL_h */

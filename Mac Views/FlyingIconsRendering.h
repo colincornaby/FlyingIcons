@@ -7,13 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "FlyingIconsDriver.h"
+#import "FlyingIcons.hpp"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @protocol FlyingIconsRendering <NSObject>
 
-@property FlyingIconsDriver *driver;
+@property FlyingIcons::FlyingIconsContext *context;
 
 -(void)drawFlyingIconsContents;
 

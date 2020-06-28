@@ -8,13 +8,13 @@
 
 #import <Foundation/Foundation.h>
 #import <Metal/Metal.h>
-#import "FlyingIconsDriver.h"
+#import "FlyingIcons.hpp"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface FlyingIconsMetalRenderer : NSObject
 
-@property FlyingIconsDriver *driver;
+@property FlyingIcons::FlyingIconsContext *context;
 
 -(id)init NS_UNAVAILABLE;
 -(id)initWithDevice:(id<MTLDevice>)device;

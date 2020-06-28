@@ -9,22 +9,23 @@
 //This file was intentionally kept at OpenGL 1.X for compatibility. With tools moving on I'm considering moving this to 2.X. But portability to older Macs was important when this was written.
 
 #include "FlyingIconsGL.hpp"
-#include "FlyingIcons-Mac.h"
 #include <memory.h>
 #import <OpenGL/gl.h>
 
 void iconConstructor(struct flyingIcon *icon, struct flyingIconImage * images, unsigned int imageCount, void *context);
 void iconDestructor(struct flyingIcon *icon, void *context);
-void * GLResourceAllocator (void * context, flyingIcon *icon);
+void * GLResourceAllocator (void * context, FlyingIcons::FlyingIcon &icon);
 void GLResourceDeallocator (void * context, void * resource);
 
-void drawFlyingIcons(flyingIconsContextPtr context, FlyingIcons::ResourceLoader &resourceLoader, float hRes, float vRes) {
+using namespace FlyingIcons;
+
+void drawFlyingIcons(FlyingIconsContext &context, FlyingIcons::ResourceLoader &resourceLoader, float hRes, float vRes) {
     resourceLoader.resourceAllocator = &GLResourceAllocator;
     resourceLoader.resourceDeallocator = &GLResourceDeallocator;
     
     glEnable(GL_TEXTURE_2D);
     
-    context->xBias = hRes/vRes;
+    context.xBias = hRes/vRes;
     
     glClearColor(0.0, 0.0, 0.0, 1.0);
     
@@ -56,20 +57,19 @@ void drawFlyingIcons(flyingIconsContextPtr context, FlyingIcons::ResourceLoader 
     struct timeval currTime;
     gettimeofday(&currTime, NULL);
     
-    prepareContext(context, currTime);
+    context.prepare(currTime);
     resourceLoader.updateForContext(context);
     
-    struct flyingIcon * icon = context->firstIcon;
-    struct flyingIcon *lastIcon = NULL;
     
-    while(icon!=NULL)
+    for (std::vector<FlyingIcon * const>::iterator it = context.icons.begin() ; it != context.icons.end(); ++it)
     {
+        FlyingIcon *icon = (*it);
         
         glPushMatrix();
         
         matrix_float4x4 transform;
         float alpha;
-        currentMatrixStateOfFlyingIcon(icon, &transform, &alpha, context);
+        currentMatrixStateOfFlyingIcon(*icon, &transform, &alpha, context);
         //matrix_float4x4 is by column, OpenGL expects by row
         matrix_float4x4 transformByRow = matrix_transpose(transform);
         
@@ -105,8 +105,6 @@ void drawFlyingIcons(flyingIconsContextPtr context, FlyingIcons::ResourceLoader 
             
             
         }
-        lastIcon = icon;
-        icon = icon->nextIcon;
         glPopMatrix();
     }
     
@@ -118,7 +116,7 @@ void drawFlyingIcons(flyingIconsContextPtr context, FlyingIcons::ResourceLoader 
 }
 
 
-void * GLResourceAllocator (void * context, flyingIcon *icon)
+void * GLResourceAllocator (void * context, FlyingIcons::FlyingIcon &icon)
 {
     GLuint texture;
     glGenTextures(1, (GLuint *)&texture);
@@ -127,7 +125,7 @@ void * GLResourceAllocator (void * context, flyingIcon *icon)
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR_MIPMAP_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, icon->width, icon->height, 0, GL_RGBA, GL_UNSIGNED_BYTE, (const void *) icon->bitmapData);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, icon.image->width, icon.image->height, 0, GL_RGBA, GL_UNSIGNED_BYTE, (const void *) icon.image->bitmapData());
     return (void *) (size_t) texture;
 }
 

@@ -19,7 +19,7 @@
 
 @implementation FlyingIconsGLView
 
-@synthesize driver;
+@synthesize context;
 
 - (instancetype)initWithCoder:(NSCoder *)coder
 {
@@ -61,14 +61,14 @@
 }
 
 -(void)drawFlyingIconsContents {
-    if(self.driver) {
+    if(self.context) {
         
         NSOpenGLContext *glContext = self.openGLContext;
         CGLLockContext(glContext.CGLContextObj);
         [glContext makeCurrentContext];
         GLint dims[4] = {0};
         glGetIntegerv(GL_VIEWPORT, dims);
-        drawFlyingIcons(self.driver.iconsContext, _resourceLoader, dims[2], dims[3]);
+        drawFlyingIcons(*context, _resourceLoader, dims[2], dims[3]);
         [glContext flushBuffer];
         CGLUnlockContext(glContext.CGLContextObj);
     }

@@ -39,6 +39,7 @@
 #import <ScreenSaver/ScreenSaver.h>
 #import "FlyingIconsDriver.h"
 #import "FlyingIconsRendering.h"
+#import "ConfigurationWindowController.h"
 
 @interface Flying_Icons_ScreensaverView : ScreenSaverView
 {
@@ -46,4 +47,5 @@
 }
 @property (retain) FlyingIconsDriver * driver;
 @property (retain) NSView<FlyingIconsRendering> *renderView;
+@property (retain) ConfigurationWindowController *configurationWindowController;
 @end

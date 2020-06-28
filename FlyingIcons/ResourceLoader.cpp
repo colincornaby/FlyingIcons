@@ -10,26 +10,25 @@
 
 using namespace FlyingIcons;
 
-void ResourceLoader::updateForContext(struct flyingIconsContext *iconsContext)
+void ResourceLoader::updateForContext(const FlyingIconsContext &context)
 {
     std::map <unsigned int, void *> leftoverResources = resources;
-    flyingIcon *icon = iconsContext->firstIcon;
-    while(icon != NULL) {
+    for (std::vector<FlyingIcon * const>::iterator it = context.icons.begin() ; it != context.icons.end(); ++it)
+    {
+        FlyingIcon *icon = (*it);
         unsigned int identifier = icon->identifier;
         void * resource = resources[identifier];
         if(resource == NULL) {
-            void * resource = resourceAllocator(context, icon);
+            void * resource = resourceAllocator(this->context, *icon);
             resources[identifier] = resource;
         } else {
             leftoverResources.erase(identifier);
         }
-        
-        icon = icon->nextIcon;
     }
     
     std::map<unsigned int, void *>::iterator iterator;
     for (iterator = leftoverResources.begin(); iterator != leftoverResources.end(); ++iterator) {
-        resourceDeallocator(context, iterator->second);
+        resourceDeallocator(this->context, iterator->second);
         resources.erase(iterator->first);
     }
 }

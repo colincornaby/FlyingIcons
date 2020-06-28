@@ -12,14 +12,10 @@
 
 @interface FlyingIconsDriver : NSObject <NSMetadataQueryDelegate>
 
-
-@property          flyingIconsContextPtr   iconsContext;
 @property                NSMetadataQuery * query;
-@property                           void //* nextJumboIcon,
-                                         * nextIcon,
-                                         * nextSmallIcon,
-                                         * nextSmallestIcon;
+@property                NSImage * nextIcon;
 
+-(NSImage *)nextIconIfAvailable;
 -(void) start;
 
 @end

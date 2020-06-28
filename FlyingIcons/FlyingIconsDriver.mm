@@ -50,8 +50,6 @@ struct flyingIconImage * iconCallback(void * callbackContext);
     _query.predicate = [NSPredicate predicateWithFormat:@"kMDItemKind == 'Application'"];
     _query.delegate = self;
     [_query startQuery];
-    self.iconsContext = newFlyingIconsContext();
-    setFlyingIconsContextCallback(self.iconsContext, iconCallback, (__bridge void *) self);
     [self performSelectorInBackground:@selector(getNextIcon) withObject:nil];
 }
 
@@ -77,40 +75,13 @@ struct flyingIconImage * iconCallback(void * callbackContext);
     }
     NSImage * iconImage = [[NSImage alloc] initWithContentsOfFile:iconFilePath];
     
-    /*void * jumboImageBuffer = malloc(4 * 512 * 512);
-    NSBitmapImageRep *bitmap = [[NSBitmapImageRep alloc] initWithBitmapDataPlanes:(unsigned char **)&jumboImageBuffer pixelsWide:512 pixelsHigh:512 bitsPerSample:8 samplesPerPixel:4 hasAlpha:YES isPlanar:NO colorSpaceName:NSCalibratedRGBColorSpace bytesPerRow:512*4 bitsPerPixel:32];
-    NSGraphicsContext *gContext = [NSGraphicsContext graphicsContextWithBitmapImageRep:bitmap];
-    [NSGraphicsContext setCurrentContext:gContext];
-    [iconImage drawInRect:NSMakeRect(0.0, 0.0, 512.0, 512.0) fromRect:NSMakeRect(0.0, 0.0, [iconImage size].width, [iconImage size].height) operation:NSCompositeCopy fraction:1.0];
-    self.nextJumboIcon = jumboImageBuffer;*/
-    
-    void * imageBuffer = malloc(4 * 128 * 128);
-    NSBitmapImageRep *bitmap = [[NSBitmapImageRep alloc] initWithBitmapDataPlanes:(unsigned char **)&imageBuffer pixelsWide:128 pixelsHigh:128 bitsPerSample:8 samplesPerPixel:4 hasAlpha:YES isPlanar:NO colorSpaceName:NSCalibratedRGBColorSpace bytesPerRow:128*4 bitsPerPixel:32];
-    NSGraphicsContext *gContext = [NSGraphicsContext graphicsContextWithBitmapImageRep:bitmap];
-    [NSGraphicsContext setCurrentContext:gContext];
-    [iconImage drawInRect:NSMakeRect(0.0, 0.0, 128.0, 128.0) fromRect:NSMakeRect(0.0, 0.0, [iconImage size].width, [iconImage size].height) operation:NSCompositeCopy fraction:1.0];
-    self.nextIcon = imageBuffer;
+    self.nextIcon = iconImage;
 }
 
-struct flyingIconImage * iconCallback(void * callbackContext)
+-(NSImage *)nextIconIfAvailable
 {
-    FlyingIconsDriver * self = (__bridge FlyingIconsDriver *)callbackContext;
-    if(!self.nextIcon)
-        return 0;
-    
-    struct flyingIconImage * image = (struct flyingIconImage *) malloc(sizeof(struct flyingIconImage));
-    
-    image->width = 128;
-    image->height = 128;
-    image->imageBuffer=self.nextIcon;
-    
-    self.nextIcon = nil;
-    self.nextSmallIcon = nil;
-    self.nextSmallestIcon = nil;
-    
     [self performSelectorInBackground:@selector(getNextIcon) withObject:nil];
-    
-    return image;
+    return self.nextIcon;
 }
 
 @end

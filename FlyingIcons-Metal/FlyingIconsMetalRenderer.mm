@@ -9,8 +9,9 @@
 #import "FlyingIconsMetalRenderer.h"
 #import <Metal/Metal.h>
 #import <simd/simd.h>
-#import "FlyingIcons-Mac.h"
+#import "FlyingIcons-Mac.hpp"
 #import "ResourceLoader.hpp"
+#import <IOSurface/IOSurface.h>
 
 @interface FlyingIconsMetalRenderer ()
 @property id<MTLDevice> device;
@@ -37,7 +38,8 @@ struct Uniforms
 
 -(void)render:(MTLRenderPassDescriptor *)renderPassDescriptor commandBuffer:(id<MTLCommandBuffer>)commandBuffer
 {
-    self.driver.iconsContext->constructorDestructorCallback = (__bridge void *)self;
+    float aspectRatio = ((float)renderPassDescriptor.colorAttachments[0].texture.width)/((float)renderPassDescriptor.colorAttachments[0].texture.height);
+    _context->xBias = aspectRatio;
     if(!self.pipelineState) {
         id<MTLLibrary> library = [self.device newDefaultLibraryWithBundle:[NSBundle bundleForClass:self.class] error:nil];
         MTLRenderPipelineDescriptor *pipelineDescriptor = [[MTLRenderPipelineDescriptor alloc] init];
@@ -80,18 +82,18 @@ struct Uniforms
     
     struct timeval currTime;
     gettimeofday(&currTime, NULL);
-    prepareContext(self.driver.iconsContext, currTime);
+    _context->prepare(currTime);
     
     id<MTLRenderCommandEncoder> renderCommandEncoder = [commandBuffer renderCommandEncoderWithDescriptor:renderPassDescriptor];
     [renderCommandEncoder setRenderPipelineState:self.pipelineState];
     
-    _resourceLoader.updateForContext(self.driver.iconsContext);
-    struct flyingIcon * icon = self.driver.iconsContext->firstIcon;
-    while(icon!=NULL)
+    _resourceLoader.updateForContext(*_context);
+    for (std::vector<FlyingIcon * const>::iterator it = _context->icons.begin() ; it != _context->icons.end(); ++it)
     {
+        FlyingIcon *icon = (*it);
         matrix_float4x4 transform;
         float alpha;
-        currentMatrixStateOfFlyingIcon(icon, &transform, &alpha, self.driver.iconsContext);
+        currentMatrixStateOfFlyingIcon(*icon, &transform, &alpha, *_context);
         
         struct Uniforms uniforms;
         uniforms.transform = transform;
@@ -113,27 +115,24 @@ struct Uniforms
                 0.0, 1.0,
                 1.0, 1.0};
             
-            id<MTLBuffer> transformBuffer = [renderCommandEncoder.device newBufferWithBytes:&uniforms length:sizeof(uniforms) options:0];
-            
             [renderCommandEncoder setVertexBytes:(void *)vertices length:sizeof(float) * 18 atIndex:0];
             [renderCommandEncoder setVertexBytes:(void *)texVertices length:sizeof(float) * 12 atIndex:1];
-            [renderCommandEncoder setVertexBuffer:transformBuffer offset:0 atIndex:2];
+            [renderCommandEncoder setVertexBytes:&uniforms length:sizeof(struct Uniforms) atIndex:2];
             id<MTLTexture> texture = (__bridge id<MTLTexture>) _resourceLoader[icon->identifier];
             [renderCommandEncoder setFragmentTexture:texture atIndex:0];
             [renderCommandEncoder drawPrimitives:MTLPrimitiveTypeTriangleStrip vertexStart:0 vertexCount:6];
             
         }
-        icon = icon->nextIcon;
     }
     [renderCommandEncoder endEncoding];
 }
 
-void * MetalResourceAllocator(void * context, flyingIcon *icon)
+void * MetalResourceAllocator(void * context, FlyingIcon &icon)
 {
     FlyingIconsMetalRenderer *self = (__bridge FlyingIconsMetalRenderer *)context;
-    MTLTextureDescriptor *textureDescriptor = [MTLTextureDescriptor texture2DDescriptorWithPixelFormat:MTLPixelFormatRGBA8Unorm width:icon->width height:icon->height mipmapped:NO];
+    MTLTextureDescriptor *textureDescriptor = [MTLTextureDescriptor texture2DDescriptorWithPixelFormat:MTLPixelFormatRGBA8Unorm width:icon.image->width height:icon.image->height mipmapped:NO];
     id<MTLTexture> texture = [self.device newTextureWithDescriptor:textureDescriptor];
-    [texture replaceRegion:MTLRegionMake2D(0, 0, icon->width, icon->height) mipmapLevel:0 withBytes:icon->bitmapData bytesPerRow:icon->width * 4];
+    [texture replaceRegion:MTLRegionMake2D(0, 0, icon.image->width, icon.image->height) mipmapLevel:0 withBytes:icon.image->bitmapData() bytesPerRow:icon.image->width * 4];
     return (void *) CFBridgingRetain(texture);
 }
 

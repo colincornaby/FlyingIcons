@@ -43,6 +43,8 @@ struct flyingIconsContext
     int currentIconNum;
     struct flyingIcon *firstIcon;
     float xBias;
+    float rotationPercentage;
+    unsigned int numberOfIcons;
     struct flyingIconImage * (*iconGetter)(void * context);
     void * callbackContext;
     void * constructorDestructorCallback;

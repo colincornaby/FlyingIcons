@@ -9,7 +9,6 @@
 
 @interface AppDelegate : NSObject <NSApplicationDelegate, NSWindowDelegate>
 
-@property FlyingIconsDriver *driver;
 @property (assign) IBOutlet NSWindow *window;
 @property (assign) IBOutlet FlyingIconsGLView *glView;
 @property (assign) CVDisplayLinkRef displayLink;

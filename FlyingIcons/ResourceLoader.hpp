@@ -10,15 +10,15 @@
 #define ResourceLoader_hpp
 
 #include <stdio.h>
-#include "FlyingIcons.h"
+#include "FlyingIcons.hpp"
 #import <map>
 
 namespace FlyingIcons {
 class ResourceLoader {
 public:
-    void updateForContext(struct flyingIconsContext *context);
+    void updateForContext(const FlyingIconsContext &context);
     void * operator[](unsigned int index);
-    void * (*resourceAllocator) (void * context, flyingIcon *icon);
+    void * (*resourceAllocator) (void * context, FlyingIcon &icon);
     void (*resourceDeallocator) (void * context, void * resource);
     void * context;
 private:

@@ -45,7 +45,6 @@
 #define fadeInTime 1500.0f
 #define lifeTime 17000.0f
 #define fadeOutTime 1500.0f
-#define numIcons 22.0f
 
 void addNewIcon(flyingIconsContextPtr context);
 void destroyIcon(struct flyingIcon * icon, flyingIconsContextPtr context);
@@ -87,7 +86,7 @@ void prepareContext(flyingIconsContextPtr context, struct timeval currTime)
     
     long lastIconSpawnTime = ((seconds) * 1000 + useconds/1000.0) + 0.5;
     
-    if(lastIconSpawnTime > lifeTime / numIcons)
+    if(lastIconSpawnTime > lifeTime / context->numberOfIcons)
     {
         addNewIcon(context);
         gettimeofday(&(context->lastIconSpawnTime), NULL);
@@ -100,6 +99,8 @@ flyingIconsContextPtr newFlyingIconsContext(void) {
     context->currentIconNum = 0;
     context->firstIcon = NULL;
     context->iconGetter = NULL;
+    context->rotationPercentage = 0.05;
+    context->numberOfIcons = 22;
     gettimeofday(&(context->lastIconSpawnTime), NULL);
     return context;
 }
@@ -112,16 +113,17 @@ void setFlyingIconsContextCallback(flyingIconsContextPtr   context,
 }
 
 void destroyIcon(struct flyingIcon * icon, flyingIconsContextPtr context)      {
+    free(icon->bitmapData);
     free(icon);
 }
 
-struct flyingIcon * createFlyingIcon(float xBias);
+struct flyingIcon * createFlyingIcon(flyingIconsContextPtr context, float xBias);
 
 void addNewIcon(flyingIconsContextPtr context)  {
     struct flyingIconImage *image = context->iconGetter(context->callbackContext);
     if(image)
     {
-        struct flyingIcon * newIcon = createFlyingIcon(context->xBias);
+        struct flyingIcon * newIcon = createFlyingIcon(context, context->xBias);
         newIcon->bitmapData = image->imageBuffer;
         newIcon->width = image->width;
         newIcon->height = image->height;
@@ -138,7 +140,7 @@ void addNewIcon(flyingIconsContextPtr context)  {
     }
 }
 
-struct flyingIcon * createFlyingIcon(float xBias) {
+struct flyingIcon * createFlyingIcon(flyingIconsContextPtr context, float xBias) {
     struct flyingIcon *icon = malloc(sizeof(struct flyingIcon));
     struct timeval spawnTime;
     gettimeofday(&spawnTime, NULL);
@@ -149,7 +151,7 @@ struct flyingIcon * createFlyingIcon(float xBias) {
     r = (float)rand()/(float)RAND_MAX;
     float iconSpeed = (1.0f - (r * r)) * 0.05 + 0.0035;
     r = (float)rand()/(float)RAND_MAX;
-    icon->twirl = (r * 25.0f) < 1.0f;
+    icon->twirl = (r * (1.0f/context->rotationPercentage)) < 1.0f;
     icon->deltaX = iconSpeed * cos(iconAngle) * xBias;
     icon->deltaY = iconSpeed * sin(iconAngle);
     return icon;

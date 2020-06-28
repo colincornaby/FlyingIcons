@@ -5,6 +5,7 @@
 
 #import "AppDelegate-OpenGL.h"
 #import <OpenGL/gl.h>
+#import "FlyingIcons-Mac.hpp"
 
 @implementation AppDelegate
 
@@ -12,9 +13,7 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     self.window.delegate = self;
-    self.driver = [[FlyingIconsDriver alloc] init];
-    self.glView.driver = self.driver;
-    [self.driver start];
+    _glView.context = new FlyingIcons::MacFlyingIconsContext();
     CVDisplayLinkCreateWithActiveCGDisplays(&_displayLink);
     CVDisplayLinkSetOutputCallback(self.displayLink, &DisplayLinkCallback, (__bridge void * _Nullable)(self));
     CVDisplayLinkSetCurrentCGDisplayFromOpenGLContext(self.displayLink, self.glView.openGLContext.CGLContextObj, self.glView.pixelFormat.CGLPixelFormatObj);

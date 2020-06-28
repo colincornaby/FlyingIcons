@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="16097" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16097"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="ConfigurationWindowController">
+            <connections>
+                <outlet property="window" destination="F0z-JX-Cv5" id="gIp-Ho-8D9"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" frameAutosaveName="ConfigurationWindow" animationBehavior="default" titleVisibility="hidden" id="F0z-JX-Cv5" customClass="NSPanel">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="196" y="240" width="480" height="270"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1417"/>
+            <view key="contentView" id="se5-gp-TjO">
+                <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ehP-td-GZG">
+                        <rect key="frame" x="153" y="228" width="309" height="24"/>
+                        <sliderCell key="cell" continuous="YES" state="on" alignment="left" maxValue="1" doubleValue="0.5" tickMarkPosition="below" numberOfTickMarks="4" sliderType="linear" id="66W-HE-dRc"/>
+                        <connections>
+                            <binding destination="-2" name="value" keyPath="self.rotationPercentage" id="NOM-Sy-uFN"/>
+                        </connections>
+                    </slider>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="VJE-R7-UXH">
+                        <rect key="frame" x="18" y="234" width="59" height="16"/>
+                        <textFieldCell key="cell" lineBreakMode="clipping" title="Rotation:" id="w6I-I1-vzf">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="PWF-2f-duo">
+                        <rect key="frame" x="18" y="197" width="109" height="16"/>
+                        <textFieldCell key="cell" lineBreakMode="clipping" title="Number of Icons:" id="yZn-lb-t3q">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tPi-jQ-tiw">
+                        <rect key="frame" x="407" y="13" width="59" height="32"/>
+                        <buttonCell key="cell" type="push" title="OK" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Q0H-Zv-Das">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                            <string key="keyEquivalent" base64-UTF8="YES">
+DQ
+</string>
+                        </buttonCell>
+                        <connections>
+                            <action selector="dismissController:" target="-2" id="rcx-XG-Lm1"/>
+                        </connections>
+                    </button>
+                    <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="yWc-j2-GVi">
+                        <rect key="frame" x="153" y="191" width="309" height="24"/>
+                        <sliderCell key="cell" continuous="YES" state="on" alignment="left" minValue="5" maxValue="30" doubleValue="5" tickMarkPosition="below" numberOfTickMarks="25" allowsTickMarkValuesOnly="YES" sliderType="linear" id="9RY-tv-PNQ"/>
+                        <connections>
+                            <binding destination="-2" name="value" keyPath="self.numberOfIcons" id="NKH-aV-aip"/>
+                        </connections>
+                    </slider>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="yWc-j2-GVi" firstAttribute="width" secondItem="ehP-td-GZG" secondAttribute="width" id="41d-yM-afb"/>
+                    <constraint firstItem="VJE-R7-UXH" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="20" symbolic="YES" id="BiY-Zm-2cm"/>
+                    <constraint firstItem="ehP-td-GZG" firstAttribute="top" secondItem="VJE-R7-UXH" secondAttribute="top" id="Jc7-Eu-CTY"/>
+                    <constraint firstAttribute="trailing" secondItem="ehP-td-GZG" secondAttribute="trailing" constant="20" symbolic="YES" id="Li7-F9-MFR"/>
+                    <constraint firstItem="ehP-td-GZG" firstAttribute="leading" secondItem="VJE-R7-UXH" secondAttribute="trailing" constant="80" id="NCL-w9-cc2"/>
+                    <constraint firstItem="VJE-R7-UXH" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="20" symbolic="YES" id="Njz-2H-s4o"/>
+                    <constraint firstItem="yWc-j2-GVi" firstAttribute="top" secondItem="ehP-td-GZG" secondAttribute="bottom" constant="16" id="XfL-LJ-hRG"/>
+                    <constraint firstItem="PWF-2f-duo" firstAttribute="top" secondItem="VJE-R7-UXH" secondAttribute="bottom" constant="21" id="ckJ-dD-oVD"/>
+                    <constraint firstAttribute="trailing" secondItem="yWc-j2-GVi" secondAttribute="trailing" constant="20" id="kGC-mF-3LW"/>
+                    <constraint firstItem="PWF-2f-duo" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="20" id="nyw-Te-aii"/>
+                    <constraint firstAttribute="trailing" secondItem="tPi-jQ-tiw" secondAttribute="trailing" constant="20" symbolic="YES" id="tfh-ms-D96"/>
+                    <constraint firstAttribute="bottom" secondItem="tPi-jQ-tiw" secondAttribute="bottom" constant="20" symbolic="YES" id="xxf-Te-83G"/>
+                </constraints>
+            </view>
+            <connections>
+                <outlet property="delegate" destination="-2" id="0bl-1N-AYu"/>
+            </connections>
+            <point key="canvasLocation" x="139" y="147"/>
+        </window>
+    </objects>
+</document>
