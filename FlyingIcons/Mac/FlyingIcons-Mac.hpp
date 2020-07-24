@@ -16,23 +16,23 @@
 using namespace FlyingIcons;
 
 namespace FlyingIcons {
-    class MacFlyingIconsContext: public FlyingIconsContext {
+    class MacContext: public Context {
     public:
-        MacFlyingIconsContext();
-        ~MacFlyingIconsContext();
-        virtual FlyingIconImage * nextIconImage();
+        MacContext();
+        ~MacContext();
+        virtual Image * nextIconImage();
     private:
         FlyingIconsDriver *driver;
     };
 
-    class MacFlyingIconImage: public FlyingIconImage {
+    class MacImage: public Image {
     public:
-        virtual void * bitmapData();
-        MacFlyingIconImage(NSImage *image);
-        virtual ~MacFlyingIconImage();
+        virtual void copyBitmapData(void * buffer);
+        MacImage(NSImage *image);
+        virtual ~MacImage();
     protected:
     private:
-        NSBitmapImageRep *imageRep;
+        NSImageRep *imageRep;
     };
 }
 

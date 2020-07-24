@@ -131,8 +131,20 @@ void * MetalResourceAllocator(void * context, FlyingIcon &icon)
 {
     FlyingIconsMetalRenderer *self = (__bridge FlyingIconsMetalRenderer *)context;
     MTLTextureDescriptor *textureDescriptor = [MTLTextureDescriptor texture2DDescriptorWithPixelFormat:MTLPixelFormatRGBA8Unorm width:icon.image->width height:icon.image->height mipmapped:NO];
-    id<MTLTexture> texture = [self.device newTextureWithDescriptor:textureDescriptor];
-    [texture replaceRegion:MTLRegionMake2D(0, 0, icon.image->width, icon.image->height) mipmapLevel:0 withBytes:icon.image->bitmapData() bytesPerRow:icon.image->width * 4];
+    IOSurfaceRef surface = IOSurfaceCreate((CFDictionaryRef)@{
+        (NSString *)kIOSurfaceWidth:            [NSNumber numberWithInt:icon.image->width],
+        (NSString *)kIOSurfaceHeight:           [NSNumber numberWithInt:icon.image->height],
+        (NSString *)kIOSurfaceBytesPerElement:  @4,
+        (NSString *)kIOSurfaceBytesPerRow:      @(icon.image->width * 4),
+        (NSString *)kIOSurfacePixelFormat:      @"RGBA"
+                    });
+    textureDescriptor.storageMode = MTLStorageModeManaged;
+    IOSurfaceLock(surface, 0, nil);
+    icon.image->copyBitmapData(IOSurfaceGetBaseAddress(surface));
+    IOSurfaceUnlock(surface, 0, 0);
+    id<MTLTexture> texture = [self.device newTextureWithDescriptor:textureDescriptor iosurface:surface plane:0];
+    //[texture.buffer didModifyRange:NSMakeRange(0, texture.buffer.length)];
+    CFRelease(surface);
     return (void *) CFBridgingRetain(texture);
 }
 

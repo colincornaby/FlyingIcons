@@ -10,7 +10,7 @@
 
 using namespace FlyingIcons;
 
-void ResourceLoader::updateForContext(const FlyingIconsContext &context)
+void ResourceLoader::updateForContext(const Context &context)
 {
     std::map <unsigned int, void *> leftoverResources = resources;
     for (std::vector<FlyingIcon * const>::iterator it = context.icons.begin() ; it != context.icons.end(); ++it)

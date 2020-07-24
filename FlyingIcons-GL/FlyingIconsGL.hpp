@@ -13,6 +13,6 @@
 #include <stdio.h>
 #include "ResourceLoader.hpp"
 
-void drawFlyingIcons(FlyingIcons::FlyingIconsContext &context, FlyingIcons::ResourceLoader &resourceLoader, float hRes, float vRes);
+void drawFlyingIcons(FlyingIcons::Context &context, FlyingIcons::ResourceLoader &resourceLoader, float hRes, float vRes);
 
 #endif /* FlyingIconsGL_h */

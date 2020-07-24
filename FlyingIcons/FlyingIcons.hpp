@@ -18,20 +18,20 @@ using namespace std;
 
 namespace FlyingIcons {
 
-class FlyingIconImage {
+class Image {
 public:
-    virtual void * bitmapData() = 0;
+    virtual void copyBitmapData(void * buffer) = 0;
     int width;
     int height;
-    virtual ~FlyingIconImage();
+    virtual ~Image();
 };
 
 class FlyingIcon {
 public:
     virtual ~FlyingIcon();
-    FlyingIconImage *image;
+    Image *image;
     struct timeval spawnTime;
-    FlyingIcon(float xBias, bool twirls, FlyingIconImage *image);
+    FlyingIcon(float xBias, bool twirls, Image *image);
     unsigned int identifier;
     float xVelocity;
     float yVelocity;
@@ -39,9 +39,9 @@ public:
 private:
 };
 
-class FlyingIconsContext {
+class Context {
 public:
-    FlyingIconsContext();
+    Context();
     float xBias;
     float rotationPercentage;
     unsigned int numberOfIcons;
@@ -49,7 +49,7 @@ public:
     void prepare(struct timeval currtime);
     vector<FlyingIcon *> icons;
 protected:
-    virtual FlyingIconImage * nextIconImage() = 0;
+    virtual Image * nextIconImage() = 0;
 private:
     struct timeval currTime;
     unsigned int numberOfCreatedIcons;
@@ -58,7 +58,7 @@ private:
 
 }
 
-void currentMatrixStateOfFlyingIcon(FlyingIcons::FlyingIcon &icon, simd_float4x4 *transform, float *alpha, FlyingIcons::FlyingIconsContext &context);
+void currentMatrixStateOfFlyingIcon(FlyingIcons::FlyingIcon &icon, simd_float4x4 *transform, float *alpha, FlyingIcons::Context &context);
 
 
 

@@ -7,7 +7,6 @@
 #import <Metal/Metal.h>
 #import <MetalKit/MetalKit.h>
 #import "ConfigurationWindowController.h"
-#import "FlyingIcons-Mac.hpp"
 
 @interface AppDelegate ()
 @property id<MTLDevice> device;
@@ -29,7 +28,7 @@
     
     
     self.driver = [[FlyingIconsDriver alloc] init];
-    self.metalView.context = new FlyingIcons::MacFlyingIconsContext();
+    self.metalView.context = [[FlyingIconsContext alloc] init];;
     
     self.configurationWindowController = [[ConfigurationWindowController alloc] initWithWindowNibName:@"ConfigurationWindowController"];
     [self.driver start];
@@ -37,6 +36,7 @@
     NSWindowStyleMask styleMask = self.configurationWindowController.window.styleMask;
     self.configurationWindowController.window.styleMask = styleMask | NSWindowStyleMaskHUDWindow | NSWindowStyleMaskUtilityWindow;
     
+    self.configurationWindowController.context = self.metalView.context;
     [self.configurationWindowController showWindow:self];
 }
 

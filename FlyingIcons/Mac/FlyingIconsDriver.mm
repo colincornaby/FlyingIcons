@@ -47,7 +47,8 @@ struct flyingIconImage * iconCallback(void * callbackContext);
 
     srand((unsigned)time(0));
     self.query = [NSMetadataQuery new];
-    _query.predicate = [NSPredicate predicateWithFormat:@"kMDItemKind == 'Application'"];
+    _query.predicate = [NSPredicate predicateWithFormat:@"kMDItemContentType == 'com.apple.application-bundle'"];
+    _query.searchScopes = @[@"/Applications", @"/System/Applications"];
     _query.delegate = self;
     [_query startQuery];
     [self performSelectorInBackground:@selector(getNextIcon) withObject:nil];
@@ -61,19 +62,17 @@ struct flyingIconImage * iconCallback(void * callbackContext);
         return;
     }
     
-    NSString *iconFilePath  = nil;
-    
-    while(!iconFilePath)
+    NSImage * iconImage = nil;
+    while(!iconImage)
     {
         int r = ((float)rand()/(float)RAND_MAX) * (self.query.resultCount-1);
         NSMetadataItem *item = [self.query resultAtIndex:r];
         NSBundle *appBundle = [NSBundle bundleWithPath:[item valueForAttribute:@"kMDItemPath"]];
         NSDictionary *appInfo = [appBundle infoDictionary];
-        NSString *iconFileName = [appInfo objectForKey:@"CFBundleIconFile"];
-        if(iconFileName)
-            iconFilePath = [appBundle pathForImageResource:iconFileName];
+        if([appInfo objectForKey:@"CFBundleIconFile"] != nil || [appInfo objectForKey:@"CFBundleIconName"] != nil ) {
+            iconImage = [[NSWorkspace sharedWorkspace] iconForFile:[item valueForAttribute:@"kMDItemPath"]];
+        }
     }
-    NSImage * iconImage = [[NSImage alloc] initWithContentsOfFile:iconFilePath];
     
     self.nextIcon = iconImage;
 }

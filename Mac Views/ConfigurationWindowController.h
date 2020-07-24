@@ -7,16 +7,13 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "FlyingIcons.h"
+#import "FlyingIconsContext.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ConfigurationWindowController : NSWindowController
 
-@property struct flyingIconsContext * context;
-
-@property float rotationPercentage;
-@property unsigned int numberOfIcons;
+@property (retain) FlyingIconsContext * context;
 
 @end
 

@@ -19,7 +19,7 @@ void GLResourceDeallocator (void * context, void * resource);
 
 using namespace FlyingIcons;
 
-void drawFlyingIcons(FlyingIconsContext &context, FlyingIcons::ResourceLoader &resourceLoader, float hRes, float vRes) {
+void drawFlyingIcons(Context &context, FlyingIcons::ResourceLoader &resourceLoader, float hRes, float vRes) {
     resourceLoader.resourceAllocator = &GLResourceAllocator;
     resourceLoader.resourceDeallocator = &GLResourceDeallocator;
     
@@ -115,7 +115,6 @@ void drawFlyingIcons(FlyingIconsContext &context, FlyingIcons::ResourceLoader &r
     glFlush();
 }
 
-
 void * GLResourceAllocator (void * context, FlyingIcons::FlyingIcon &icon)
 {
     GLuint texture;
@@ -125,7 +124,10 @@ void * GLResourceAllocator (void * context, FlyingIcons::FlyingIcon &icon)
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR_MIPMAP_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, icon.image->width, icon.image->height, 0, GL_RGBA, GL_UNSIGNED_BYTE, (const void *) icon.image->bitmapData());
+    void *textureData = malloc(icon.image->width * icon.image->height * 4);
+    icon.image->copyBitmapData(textureData);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, icon.image->width, icon.image->height, 0, GL_RGBA, GL_UNSIGNED_BYTE, (const void *) textureData);
+    free(textureData);
     return (void *) (size_t) texture;
 }
 

@@ -8,6 +8,7 @@
 
 #import "FlyingIconsMetalView.h"
 #import "FlyingIconsMetalRenderer.h"
+#import "FlyingIconsContext-Renderers.hh"
 #import <Metal/Metal.h>
 
 
@@ -33,7 +34,7 @@
     if(!self.commandQueue) {
         self.commandQueue = self.device.newCommandQueue;
     }
-    self.renderer.context = self.context;
+    self.renderer.context = &(self.context.renderingContext);
     
     MTLRenderPassDescriptor *renderPassDescriptor = self.currentRenderPassDescriptor;
     

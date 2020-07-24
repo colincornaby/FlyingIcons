@@ -20,24 +20,4 @@
     // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
 }
 
--(void)setRotationPercentage:(float)rotationPercentage
-{
-    //self.context->rotationPercentage = rotationPercentage;
-}
-
--(float)rotationPercentage
-{
-    return 0;//self.context->rotationPercentage;
-}
-
--(void)setNumberOfIcons:(unsigned int)numberOfIcons
-{
-    //self.context->numberOfIcons = numberOfIcons;
-}
-
--(unsigned int)numberOfIcons
-{
-    return 0;//self.context->numberOfIcons;
-}
-
 @end

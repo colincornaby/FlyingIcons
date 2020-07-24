@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface FlyingIconsMetalRenderer : NSObject
 
-@property FlyingIcons::FlyingIconsContext *context;
+@property FlyingIcons::Context *context;
 
 -(id)init NS_UNAVAILABLE;
 -(id)initWithDevice:(id<MTLDevice>)device;

@@ -16,7 +16,7 @@
 namespace FlyingIcons {
 class ResourceLoader {
 public:
-    void updateForContext(const FlyingIconsContext &context);
+    void updateForContext(const Context &context);
     void * operator[](unsigned int index);
     void * (*resourceAllocator) (void * context, FlyingIcon &icon);
     void (*resourceDeallocator) (void * context, void * resource);

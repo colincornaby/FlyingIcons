@@ -12,36 +12,45 @@ using namespace FlyingIcons;
 
 
 
-MacFlyingIconsContext::MacFlyingIconsContext() {
+MacContext::MacContext() {
     this->driver = [[FlyingIconsDriver alloc] init];
     [this->driver start];
 }
 
-FlyingIconImage * MacFlyingIconsContext::nextIconImage() {
+Image * MacContext::nextIconImage() {
     NSImage *nextImage = [this->driver nextIconIfAvailable];
     if(nextImage != nil){
-        return new MacFlyingIconImage(nextImage);
+        return new MacImage(nextImage);
     }
     return nil;
 }
 
-MacFlyingIconsContext::~MacFlyingIconsContext() {
+MacContext::~MacContext() {
     //[this->driver stop];
 }
 
-MacFlyingIconImage::MacFlyingIconImage(NSImage *image) {
-    NSBitmapImageRep *rep = ((NSBitmapImageRep *)[image bestRepresentationForRect:NSMakeRect(0, 0, 512, 512) context:nil hints:nil]);
-    this->width = rep.pixelsWide;
-    this->height = rep.pixelsHigh;
-    this->imageRep = rep;
+MacImage::MacImage(NSImage *image) {
+    this->imageRep = [image bestRepresentationForRect:NSMakeRect(0, 0, 256, 256) context:nil hints:nil];
+    this->width = (int) this->imageRep.pixelsWide;
+    this->height = (int) this->imageRep.pixelsHigh;
 }
 
-void * MacFlyingIconImage::bitmapData() {
-    void * bitmapData = this->imageRep.bitmapData;
-    return bitmapData;
+void MacImage::copyBitmapData(void * buffer) {
+    CGContextRef cgContext = CGBitmapContextCreate(buffer, this->width, this->height, 8, 4 * this->width, CGColorSpaceCreateDeviceRGB(), kCGImageAlphaPremultipliedLast);
+    NSGraphicsContext *context = [NSGraphicsContext graphicsContextWithCGContext:cgContext flipped:NO];
+    [context saveGraphicsState];
+    [NSGraphicsContext setCurrentContext:context];
+    [this->imageRep drawInRect:NSMakeRect(0, 0, this->width, this->height)
+                      fromRect:NSMakeRect(0,0, imageRep.size.width, imageRep.size.height)
+                     operation:NSCompositeCopy
+                      fraction:1.0
+                respectFlipped:YES
+                         hints:@{NSImageHintInterpolation: @(NSImageInterpolationNone)}];
+    [context restoreGraphicsState];
+    CGContextRelease(cgContext);
 }
 
-MacFlyingIconImage::~MacFlyingIconImage()
+MacImage::~MacImage()
 {
     this->imageRep = nil;
 }

@@ -14,7 +14,7 @@
 
 using namespace FlyingIcons;
 
-FlyingIcon::FlyingIcon(float xBias, bool twirls, FlyingIconImage *image) {
+FlyingIcon::FlyingIcon(float xBias, bool twirls, Image *image) {
     struct timeval spawnTime;
     gettimeofday(&spawnTime, NULL);
     gettimeofday(&spawnTime, NULL);
@@ -34,7 +34,7 @@ FlyingIcon::~FlyingIcon() {
     delete this->image;
 }
 
-void FlyingIconsContext::prepare(struct timeval newTime) {
+void Context::prepare(struct timeval newTime) {
     this->currTime = newTime;
     std::vector<FlyingIcon *>::iterator it = this->icons.begin();
     while (it != this->icons.end())
@@ -59,7 +59,7 @@ void FlyingIconsContext::prepare(struct timeval newTime) {
     
     if(lastIconSpawnTime > lifeTime / this->numberOfIcons)
     {
-        FlyingIconImage *iconImage = this->nextIconImage();
+        Image *iconImage = this->nextIconImage();
         if(iconImage != NULL) {
             float r = (float)rand()/(float)RAND_MAX;
             bool twirls = (r * (1.0f/this->rotationPercentage)) < 1.0f;
@@ -74,11 +74,11 @@ void FlyingIconsContext::prepare(struct timeval newTime) {
     }
 }
 
-FlyingIconImage::~FlyingIconImage(){
+Image::~Image(){
     
 }
 
-FlyingIconsContext::FlyingIconsContext() {
+Context::Context() {
     this->rotationPercentage = 0.05;
     this->numberOfIcons = 22;
     this->numberOfCreatedIcons = 0;
@@ -86,7 +86,7 @@ FlyingIconsContext::FlyingIconsContext() {
     this->lastIconSpawnTime.tv_usec = 0;
 }
 
-void FlyingIconsContext::currentStateOfFlyingIcon(FlyingIcon &icon, float *x, float *y, float *scale, float *rotation, float *alpha) {
+void Context::currentStateOfFlyingIcon(FlyingIcon &icon, float *x, float *y, float *scale, float *rotation, float *alpha) {
     long seconds  = this->currTime.tv_sec  - icon.spawnTime.tv_sec;
     long useconds = this->currTime.tv_usec - icon.spawnTime.tv_usec;
     long iconLifeTime = ((seconds) * 1000 + useconds/1000.0) + 0.5;
@@ -118,7 +118,7 @@ void FlyingIconsContext::currentStateOfFlyingIcon(FlyingIcon &icon, float *x, fl
     }
 }
 
-void currentMatrixStateOfFlyingIcon(FlyingIcon &icon, simd_float4x4 *transform, float *alpha, FlyingIcons::FlyingIconsContext &context) {
+void currentMatrixStateOfFlyingIcon(FlyingIcon &icon, simd_float4x4 *transform, float *alpha, FlyingIcons::Context &context) {
 
     float xPos, yPos, scale, rotation;
     context.currentStateOfFlyingIcon(icon, &xPos, &yPos, &scale, &rotation, alpha);
